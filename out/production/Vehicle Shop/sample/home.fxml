@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane prefHeight="720.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Home">
+    <content>
+
+<AnchorPane prefHeight="636.0" prefWidth="1051.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <children>
+        <FontAwesomeIcon glyphName="USER" layoutX="831.0" layoutY="48.0" size="2em" wrappingWidth="20.428571701049805" />
+<!--        <JFXComboBox fx:id="comb" focusColor="#ffffff00" layoutX="862.0" layoutY="24.0" onAction="#perform" prefHeight="25.0" prefWidth="165.0" promptText="My Account" unFocusColor="#ffffff00" />-->
+        <VBox layoutX="39.0" layoutY="114.0" prefHeight="505.0" prefWidth="199.0">
+            <children>
+<!--                <JFXButton prefHeight="51.0" prefWidth="199.0" text="DASHBOARD">-->
+<!--                    <font>-->
+<!--                        <Font size="15.0" />-->
+<!--                    </font>-->
+<!--                </JFXButton>-->
+            </children>
+        </VBox>
+            <ComboBox fx:id="comboo" layoutX="859.0" layoutY="23.0" onAction="#perform" prefHeight="34.0" prefWidth="180.0" />
+    </children>
+</AnchorPane>
+    </content>
+</ScrollPane>

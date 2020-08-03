@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="com.businessrefinery.barcode">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jars/com.businessrefinery.barcode.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/controlsfx-8.40.12.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/itextpdf-5.5.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/jfoenix.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/json-simple-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/mysql-connector-java-5.0.8-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/poi-3.13-20150929.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/poi-ooxml-3.13-20150929.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/poi-ooxml-schemas-3.13-20150929.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/sqlite-jdbc-3.19.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jars/xmlbeans-2.6.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/jars/xmlworker-5.5.9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

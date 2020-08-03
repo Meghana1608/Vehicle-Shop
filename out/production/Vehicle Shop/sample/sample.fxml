@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+        <children>
+                <Label alignment="CENTER" layoutX="316.0" layoutY="24.0" prefHeight="102.0" prefWidth="105.0" style="-fx-border-color: #000; -fx-border-radius: 50px;" text="LOGIN">
+                        <font>
+                                <Font name="System Bold" size="18.0" />
+                        </font>
+                </Label>
+                <Label alignment="CENTER" layoutX="257.0" layoutY="134.0" text="For easy Billing and Stock maintainence">
+                        <font>
+                                <Font name="System Bold" size="12.0" />
+                        </font>
+                </Label>
+                <JFXTextField alignment="CENTER" focusColor="#405aa800" labelFloat="true" layoutX="249.0" layoutY="186.0" prefHeight="47.0" prefWidth="248.0" fx:id="username" promptText="USER NAME" style="-fx-background-radius: 50px; -fx-texr-fill: #fff; -fx-font-size: 14; -fx-background-color: #ffffff22; -fx-border-color: #000; -fx-border-radius: 50px;" unFocusColor="#4d4d4d00" />
+                <JFXPasswordField alignment="CENTER" focusColor="#405aa800" labelFloat="true" layoutX="249.0" layoutY="255.0" prefHeight="47.0" prefWidth="248.0" fx:id="password" promptText="PASSWORD" style="-fx-background-color: #ffffff22; -fx-background-radius: 50px; -fx-font-size: 14; -fx-border-color: #000; -fx-border-radius: 50px;" unFocusColor="#4d4d4d00" />
+             <!--   <FontAwesomeIcon glyphName="FACEBOOK" layoutX="187.0" layoutY="510.0" size="3em" text="" wrappingWidth="43.571428298950195" />
+                <FontAwesomeIcon glyphName="INSTAGRAM" layoutX="253.0" layoutY="509.0" size="3em" />
+                <FontAwesomeIcon glyphName="TWITTER" layoutX="325.0" layoutY="508.0" size="3em" />-->
+                <JFXButton buttonType="RAISED" layoutX="321.0" layoutY="332.0" onAction="#login" prefHeight="47.0" prefWidth="113.0" style="-fx-border-color: #000000; -fx-border-radius: 50px; -fx-background-radius: 50px; -fx-background-color: #3d32d1;" text="LOGIN" textFill="WHITE">
+                        <font>
+                                <Font name="System Bold" size="18.0" />
+                        </font>
+                </JFXButton>
+             <!--   <FontAwesomeIcon glyphName="YOUTUBE" layoutX="391.0" layoutY="508.0" size="3em" text="" />
+                <FontAwesomeIcon glyphName="WHATSAPP" layoutX="463.0" layoutY="507.0" size="3em" />
+                <FontAwesomeIcon glyphName="GOOGLE" layoutX="529.0" layoutY="508.0" size="3em" text="" />-->
+        </children>
+</AnchorPane>

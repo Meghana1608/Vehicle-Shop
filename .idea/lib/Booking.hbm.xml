@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+	<class name="com.mitra.dto.Booking" table="booking">
+		<meta attribute="class-description">
+			This class contains the Staff detail.
+		</meta>
+		<id name="id" type="int" column="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="fname" column="fname" type="string"/>
+		<property name="lname" column="lname" type="string"/>
+		<property name="gender" column="gender" type="string"/>
+		<property name="father_name" column="father_name" type="string"/>
+		<property name="mother_name" column="mother_name" type="string"/>
+		<property name="phone" column="phone" type="string"/>
+		<property name="dob" column="dob" type="string"/>
+		<property name="day" column="day" type="string"/>
+		<property name="month" column="month" type="string"/>
+		<property name="year" column="year" type="string"/>
+		<property name="email" column="email" type="string"/>
+		<property name="country" column="country" type="string"/>
+		<property name="state" column="state" type="string"/>
+		<property name="city" column="city" type="string"/>
+		<property name="address" column="address" type="string"/>
+		<property name="weight" column="weight" type="string"/>
+		<property name="height" column="height" type="string"/>
+		<property name="ofc" column="ofc" type="string"/>
+		<property name="reffer" column="reffer" type="string"/>
+		<property name="consult" column="consult" type="string"/>
+		<property name="appointment_date" column="appointment_date" type="string"/>
+		<property name="appointment_time" column="appointment_time" type="string"/>
+		<property name="type" column="type" type="string"/>
+		<property name="pid" column="pid" type="string"/>
+	</class>
+</hibernate-mapping>
