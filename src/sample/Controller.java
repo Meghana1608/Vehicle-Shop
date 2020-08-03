@@ -133,6 +133,7 @@ public class Controller {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("INVALID USER");
                     alert.showAndWait();
+                    System.out.println("Meghana");
                 }
             }
         } catch (Exception e) {

@@ -56,6 +56,7 @@ public class Home implements Initializable {
             case "Exit" :
                 Platform.exit();
                 break;
+           // System.out.println("bg");
             //4
         }
     }
