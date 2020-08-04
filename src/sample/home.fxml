@@ -37,8 +37,8 @@
                </children>
         </VBox>
 
-            <ComboBox fx:id="comboo" layoutX="859.0" layoutY="23.0" onAction="#perform" prefHeight="34.0" prefWidth="180.0" />
-            <AnchorPane fx:id="employee_pane" layoutX="308.0" layoutY="155.0" prefHeight="437.0" prefWidth="759.0">
+            <ComboBox fx:id="comboo" layoutX="859.0" layoutY="23.0" onAction="#perform" prefHeight="34.0" prefWidth="180.0" promptText="My Account" />
+            <AnchorPane fx:id="employee_pane" layoutX="308.0" layoutY="155.0" prefHeight="437.0" prefWidth="759.0" visible="false">
                <children>
                   <Label layoutX="27.0" layoutY="18.0" text="EMPLOYEE INFORMATION" underline="true">
                      <font>
@@ -55,36 +55,46 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label layoutX="27.0" layoutY="166.0" text="PHONE NUMBER">
+                  <Label layoutX="27.0" layoutY="202.0" text="PHONE NUMBER">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="employee_id" layoutX="172.0" layoutY="90.0" prefHeight="30.0" prefWidth="203.0">
+                  <TextField fx:id="employee_id" layoutX="172.0" layoutY="90.0" onMouseClicked="#create_id" prefHeight="30.0" prefWidth="203.0" promptText="ID NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="employee_name" layoutX="172.0" layoutY="125.0" prefHeight="30.0" prefWidth="203.0">
+                  <TextField fx:id="employee_name" layoutX="172.0" layoutY="125.0" prefHeight="30.0" prefWidth="203.0" promptText="USERNAME">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="employee_number" layoutX="172.0" layoutY="161.0" prefHeight="30.0" prefWidth="203.0">
+                  <TextField fx:id="employee_number" layoutX="172.0" layoutY="196.0" prefHeight="30.0" prefWidth="203.0" promptText="PHONE NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="172.0" layoutY="219.0" mnemonicParsing="false" onAction="#add_emp" prefHeight="34.0" prefWidth="101.0" text="ADD">
+                  <Button layoutX="172.0" layoutY="257.0" mnemonicParsing="false" onAction="#add_emp" prefHeight="34.0" prefWidth="101.0" text="ADD">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="292.0" layoutY="219.0" mnemonicParsing="false" onAction="#view_emp" prefHeight="34.0" prefWidth="101.0" text="VIEW">
+                  <Button layoutX="292.0" layoutY="257.0" mnemonicParsing="false" onAction="#view_emp" prefHeight="34.0" prefWidth="101.0" text="VIEW">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <TextField fx:id="password" layoutX="172.0" layoutY="160.0" prefHeight="30.0" prefWidth="203.0" promptText="PASSWORD">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="27.0" layoutY="165.0" text="PASSWORD">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
     </children>
