@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Customers">
+    <children>
+        <Label layoutX="339.0" layoutY="15.0" prefHeight="25.0" text="CUSTOMER DETAILS" underline="true">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Button layoutX="301.0" layoutY="50.0" mnemonicParsing="false" onAction="#gen_reg_rep" text="VIEW REPORT">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font></Button>
+        <Button layoutX="439.0" layoutY="50.0" mnemonicParsing="false" onAction="#customerReprtPDF" text="PRINT REPORT">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Pane fx:id="view_reg_pane" layoutX="20.0" layoutY="90.0" prefHeight="251.0" prefWidth="900.0" />
+        <Button layoutX="20.0" layoutY="352.0" mnemonicParsing="false" onAction="#edit_customer" prefHeight="30.0" prefWidth="119.0" text="EDIT">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Button layoutX="147.0" layoutY="352.0" mnemonicParsing="false" onAction="#delete_customers" prefHeight="30.0" prefWidth="119.0" text="DELETE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Pane fx:id="edit_pane" layoutX="92.0" layoutY="408.0" prefHeight="264.0" prefWidth="785.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
+            <children>
+                <Label layoutX="15.0" layoutY="37.0" text="ID">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="70.0" text="DATE OF SALE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="100.0" text="CUSTOMER NAME">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="393.0" layoutY="37.0" text="FATHER NAME">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="393.0" layoutY="71.0" text="VILLAGE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="394.0" layoutY="104.0" text="TEHLSI">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font></Label>
+                <Label layoutX="16.0" layoutY="137.0" text="MODEL">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font></Label>
+                <Label layoutX="16.0" layoutY="172.0" text="MOBILE NUMBER">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font></Label>
+                <Label layoutX="394.0" layoutY="140.0" text="ENGINE NUMBER">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font></Label>
+
+                <Label layoutX="393.0" layoutY="172.0" text="FILE NUMBER">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font></Label>
+
+                <TextField fx:id="cust_id" editable="false" layoutX="150.0" layoutY="30.0" prefHeight="25" prefWidth="200" promptText="ID">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="customer_name" layoutX="150.0" layoutY="98.0" prefHeight="25" prefWidth="200" promptText="EMPLOYEE NAME">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="mobile_no" layoutX="150.0" layoutY="167.0" prefHeight="25" prefWidth="200" promptText="MOBILE NUMBER">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="father_name" layoutX="522.0" layoutY="30.0" prefHeight="25" prefWidth="200" promptText="FATHER NAME">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="village" layoutX="523.0" layoutY="66.0" prefHeight="25" prefWidth="200" promptText="VILLAGE">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="tehlsi" layoutX="522.0" layoutY="99.0" prefHeight="25" prefWidth="200" promptText="TEHLSI">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+
+                <Button layoutX="300.0" layoutY="214.0" mnemonicParsing="false" onAction="#save_customer" prefHeight="30.0" prefWidth="119.0" text="SAVE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            <DatePicker fx:id="date_of_sale" layoutX="150.0" layoutY="63.0" prefHeight="30.0" prefWidth="200.0" />
+            <ComboBox fx:id="model" layoutX="150.0" layoutY="132.0" prefHeight="30.0" prefWidth="200.0" />
+            <TextField fx:id="engine_number" layoutX="523.0" layoutY="132.0" prefHeight="25" prefWidth="200" promptText="ENGINE NUMBER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="file_number" layoutX="523.0" layoutY="165.0" prefHeight="25" prefWidth="200" promptText="FILE NUMBER">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

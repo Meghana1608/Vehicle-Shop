@@ -76,7 +76,7 @@ public class Main extends Application {
         //end of checking file
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
        // primaryStage.setTitle("Express Billing");
-        primaryStage.setScene(new Scene(root, 900, 700));
+        primaryStage.setScene(new Scene(root, 775, 650));
         primaryStage.show();
 
     }

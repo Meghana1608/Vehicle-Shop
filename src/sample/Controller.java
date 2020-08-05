@@ -4,10 +4,14 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -23,11 +27,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
 
     public JFXTextField username;
     public JFXPasswordField password;
@@ -37,13 +43,48 @@ public class Controller {
     public static String loginUserName = "";
     public  static LocalDate today = LocalDate.now(ZoneId.of("Indian/Maldives"));
     public static String userEmpName;
+    public JFXTextField new_user;
+    public JFXPasswordField new_pass;
+
+    public String profileImageStringpdf;
+    public String mailAddressPdf1;
+    public String mailAddressPdf2;
+    public String emailidPdf3;
+    public String contactpdf;
+    public String gstinpdf;
+    public String acc_namepdf;
+    public String acc_numpdf;
+    public String acc_typepdf;
+    public String ifscpdf;
+    public String termspdf;
+    public String declarationpdf;
+    public String jurisidictionpdf;
+    public String statee;
+    public String districtt;
+    public String pan_number;
+    public JFXTextField buname;
+    public JFXTextField mail;
+    public JFXTextField buemailid;
+    public JFXTextField state;
+    public JFXTextField district;
+    public JFXTextField contactnum;
+    public JFXTextField gstin;
+    public TextArea terms;
+    public TextArea declaration;
+    public JFXTextField bank_aa_name;
+    public JFXTextField acc_num;
+    public JFXTextField acc_type;
+    public JFXTextField ifsc;
+    public JFXTextField pancard_no;
+    public AnchorPane rootPane;
+
 
     public static String getUserEmpName() {
         return userEmpName;
     }
 
     public static void setUserEmpName(String userEmpName) {
-        Controller.userEmpName = userEmpName;
+        userEmpName = userEmpName;
     }
 
     Connection connection = null;
@@ -207,6 +248,159 @@ public class Controller {
             dt.open(new File(path));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void updatelogin(ActionEvent actionEvent) throws SQLException {
+        if (new_user.getText().isEmpty() || new_pass.getText().isEmpty()) {
+            Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setContentText("PLEASE ENTER USERNAME AND PASSWORD");
+            alert1.showAndWait();
+        } else {
+            try {
+                connection = DBConnection.getConnection();
+                String username = new_user.getText();
+                String password = new_pass.getText();
+
+                PreparedStatement ps = connection.prepareStatement("update login set username='" + username + "' ,  password='" + password + "' where login_type='admin'");
+
+                int i = ps.executeUpdate();
+
+                if (i > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("USERNAME AND PASSWORD UPDATED SUCCESSFULLY");
+                    alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("ERROR IN UPDATING ENTER CORRECT INFORMATION");
+                    alert.showAndWait();
+                }
+
+                final Node source = (Node) actionEvent.getSource();
+                final Stage stage = (Stage) source.getScene().getWindow();
+                stage.close();
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
+                Parent root1 = (Parent) fxmlLoader.load();
+                System.out.println("stock details");
+                Stage stage1 = new Stage();
+                stage1.setTitle("stock_details");
+                stage1.setScene(new Scene(root1, 775, 650));
+                stage1.show();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            } finally {
+                if (connection != null) {
+                    connection.close();
+                }
+
+            }
+        }
+
+    }
+
+    public void update_profile(ActionEvent actionEvent) throws SQLException {
+
+        try {
+            String updateProfileQuery = "";
+            connection = DBConnection.connect();
+           // System.out.println("image is=========" + newName);
+          //  if (newName == null) {
+                updateProfileQuery = "UPDATE profile SET name='" + buname.getText() + "',mail_addres='" + mail.getText() + "' ,comemailid='" + buemailid.getText() + "'," +
+                        "contact='" + contactnum.getText() + "',gstin='" + gstin.getText() + "',state='"+state.getText()+"', district='"+district.getText()+"'," +
+                        "acc_name='" + bank_aa_name.getText() + "',acc_num='" + acc_num.getText() + "',acc_type='" + acc_type.getText() + "'," +
+                        "ifsc='" + ifsc.getText() + "',pan_no='"+pancard_no.getText()+"',terms='" + terms.getText() + "'," +
+                        "declaration='" + declaration.getText() + "'";
+//            } else {
+//                newName = newName.replace("\\", "\\\\");
+//                updateProfileQuery = "UPDATE profile SET name='" + buname.getText() + "',mail_addres='" + mail.getText() + "'," +
+//                        "logo='" + newName + "',comemailid='" + buemailid.getText() + "',contact='" + contactnum.getText() + "'," +
+//                        "gstin='" + gstin.getText() + "',licence_no='"+licence.getText()+"',acc_name='" + bank_aa_name.getText() + "'," +
+//                        "acc_num='" + acc_num.getText() + "',acc_type='" + acc_type.getText() + "',ifsc='" + ifsc.getText() + "'," +
+//                        "pan_no='"+pancard_no.getText()+"',terms='" + terms.getText() + "',declaration='" + declaration.getText() + "'," +
+//                        "jurisidiction='" + jurisid.getText() + "'";
+//            }
+
+            PreparedStatement ps = connection.prepareStatement(updateProfileQuery);
+            int i = ps.executeUpdate();
+
+            if (i > 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PROFILE INFORMATION UPDATED");
+                alert.showAndWait();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("ERROR IN UPDATING PROFILE DATA");
+                alert.showAndWait();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+        }
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            connection = DBConnection.connect();
+            Statement st = connection.createStatement();
+            ResultSet resultSet = st.executeQuery("select * from profile ");
+
+
+            while (resultSet.next()) {
+
+                profileImageStringpdf = resultSet.getString("logo");
+                mailAddressPdf1 = resultSet.getString("name");
+                mailAddressPdf2 = resultSet.getString("mail_addres");
+                emailidPdf3 = resultSet.getString("comemailid");
+                contactpdf = resultSet.getString("contact");
+                gstinpdf = resultSet.getString("gstin");
+                statee = resultSet.getString("state");
+                districtt = resultSet.getString("district");
+                acc_namepdf = resultSet.getString("acc_name");
+                acc_numpdf = resultSet.getString("acc_num");
+                acc_typepdf = resultSet.getString("acc_type");
+                ifscpdf = resultSet.getString("ifsc");
+                pan_number = resultSet.getString("pan_no");
+                termspdf = resultSet.getString("terms");
+                declarationpdf = resultSet.getString("declaration");
+
+            }
+
+            javafx.scene.image.Image image1 = new Image(profileImageStringpdf, 1000, 1500, true, true);
+
+            buname.setText(mailAddressPdf1);
+            mail.setText(mailAddressPdf2);
+         //   imageView.setImage(image1);
+            buemailid.setText(emailidPdf3);
+            contactnum.setText(contactpdf);
+            gstin.setText(gstinpdf);
+            bank_aa_name.setText(acc_namepdf);
+            acc_num.setText(acc_numpdf);
+            acc_type.setText(acc_typepdf);
+            ifsc.setText(ifscpdf);
+            pancard_no.setText(pan_number);
+            state.setText(statee);
+            district.setText(districtt);
+            terms.setText(termspdf);
+            declaration.setText(declarationpdf);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

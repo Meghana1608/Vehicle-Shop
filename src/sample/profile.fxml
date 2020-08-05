@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="633.0" prefWidth="810.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+
+    <children>
+        <Label layoutX="120.0" layoutY="29.0" prefHeight="30.0" prefWidth="153.0" text="My Profile" textFill="#3b6ce8" wrapText="true">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font></Label>
+        <Label layoutX="46.0" layoutY="117.0" prefHeight="21.0" prefWidth="115.0" text="Business Name">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="46.0" layoutY="150.0" prefHeight="21.0" prefWidth="109.0" text="Mail Address">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="46.0" layoutY="185.0" prefHeight="21.0" prefWidth="100.0" text="Mail ID">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="43.0" layoutY="288.0" prefHeight="21.0" prefWidth="115.0" text="Contact Number">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="44.0" layoutY="323.0" prefHeight="21.0" prefWidth="115.0" text="GSTIN Number">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="43.0" layoutY="358.0" prefHeight="21.0" prefWidth="139.0" text="Terms &amp; Conditions">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="45.0" layoutY="449.0" prefHeight="17.0" prefWidth="123.0" text="Declaration">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="46.0" layoutY="220.0" prefHeight="21.0" prefWidth="109.0" text="State">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="45.0" layoutY="255.0" prefHeight="21.0" prefWidth="100.0" text="District">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="500.0" layoutY="78.0" prefHeight="26.0" prefWidth="153.0" text="Account Details" underline="true" wrapText="true">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font></Label>
+        <Label layoutX="474.0" layoutY="116.0" prefHeight="21.0" prefWidth="109.0" text="Account Name">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="474.0" layoutY="151.0" prefHeight="21.0" prefWidth="115.0" text="Account number">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="474.0" layoutY="185.0" prefHeight="21.0" prefWidth="109.0" text="Account ype">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="474.0" layoutY="220.0" prefHeight="21.0" prefWidth="100.0" text="IFSC">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <Label layoutX="474.0" layoutY="254.0" prefHeight="21.0" prefWidth="109.0" text="Pan Num">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="565.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true" />
+        <FontAwesomeIcon fill="#3b6ce8" glyphName="USER" layoutX="66.0" layoutY="63.0" size="4em" />
+        <JFXTextField focusColor="#ffffff00" layoutX="168.0" layoutY="115.0" prefHeight="27.0" prefWidth="175.0" fx:id="buname" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="168.0" layoutY="148.0" prefHeight="27.0" prefWidth="175.0" fx:id="mail" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="168.0" layoutY="182.0" prefHeight="27.0" prefWidth="175.0" fx:id="buemailid" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="168.0" layoutY="217.0" prefHeight="27.0" prefWidth="175.0" fx:id="state" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="168.0" layoutY="251.0" prefHeight="27.0" prefWidth="175.0" fx:id="district" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="168.0" layoutY="285.0" prefHeight="27.0" prefWidth="175.0" fx:id="contactnum" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="169.0" layoutY="320.0" prefHeight="27.0" prefWidth="175.0" fx:id="gstin" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <TextArea layoutX="187.0" layoutY="358.0" prefHeight="80.0" prefWidth="259.0" fx:id="terms" style="-fx-border-radius: 5px; -fx-border-color: #000;" />
+        <TextArea layoutX="187.0" layoutY="449.0" prefHeight="80.0" prefWidth="259.0" fx:id="declaration" style="-fx-border-radius: 5px; -fx-border-color: #000;" />
+        <JFXButton layoutX="328.0" layoutY="564.0" onAction="#update_profile" prefHeight="36.0" prefWidth="237.0" style="-fx-border-radius: 5px; -fx-background-color: #3b6ce8;" text="UPDATE" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </JFXButton>
+        <FontAwesomeIcon glyphName="MONEY" layoutX="473.0" layoutY="99.0" size="1.5em" />
+        <JFXTextField focusColor="#ffffff00" layoutX="591.0" layoutY="115.0" prefHeight="27.0" prefWidth="175.0" fx:id="bank_aa_name" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="592.0" layoutY="148.0" prefHeight="27.0" prefWidth="175.0" fx:id="acc_num" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="592.0" layoutY="182.0" prefHeight="27.0" prefWidth="175.0" fx:id="acc_type" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="591.0" layoutY="217.0" prefHeight="27.0" prefWidth="175.0" fx:id="ifsc" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+        <JFXTextField focusColor="#ffffff00" layoutX="591.0" layoutY="251.0" prefHeight="27.0" prefWidth="175.0" fx:id="pancard_no" style="-fx-border-radius: 5px; -fx-border-color: #000;" unFocusColor="#ffffff00" />
+<!--        <JFXButton layoutX="594.0" layoutY="294.0" onAction="#select_icon" prefHeight="36.0" prefWidth="175.0" style="-fx-border-radius: 5px; -fx-background-color: #3b6ce8;" text="SELECT ICON" textFill="WHITE">-->
+<!--            <font>-->
+<!--                <Font name="System Bold" size="14.0" />-->
+<!--            </font>-->
+<!--        </JFXButton>-->
+    </children>
+
+</AnchorPane>

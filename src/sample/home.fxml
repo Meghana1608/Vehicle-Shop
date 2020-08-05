@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -17,19 +18,29 @@
     <children>
         <FontAwesomeIcon glyphName="USER" layoutX="831.0" layoutY="48.0" size="2em" wrappingWidth="20.428571701049805" />
 <!--        <JFXComboBox fx:id="comb" focusColor="#ffffff00" layoutX="862.0" layoutY="24.0" onAction="#perform" prefHeight="25.0" prefWidth="165.0" promptText="My Account" unFocusColor="#ffffff00" />-->
-        <VBox layoutX="39.0" layoutY="155.0" prefHeight="464.0" prefWidth="199.0">
+        <VBox layoutX="39.0" layoutY="155.0" prefHeight="308.0" prefWidth="199.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#open_employee" prefHeight="61.0" prefWidth="199.0" text="ADD EMPLOYEES">
+                  <Button mnemonicParsing="false" onAction="#open_employee" prefHeight="61.0" prefWidth="199.0" text="EMPLOYEES">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="199.0" text="ADD MODELS">
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#open_model" prefHeight="61.0" prefWidth="199.0" text="MODELS">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="10.0" layoutY="71.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="199.0" text="ADD CUSTOMERS">
+                  <Button layoutX="10.0" layoutY="71.0" mnemonicParsing="false" onAction="#open_cust" prefHeight="61.0" prefWidth="199.0" text="CUSTOMERS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="133.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="197.0" text="RENEWALS">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="11.0" layoutY="194.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="197.0" text="MESSAGE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -38,7 +49,7 @@
         </VBox>
 
             <ComboBox fx:id="comboo" layoutX="859.0" layoutY="23.0" onAction="#perform" prefHeight="34.0" prefWidth="180.0" promptText="My Account" />
-            <AnchorPane fx:id="employee_pane" layoutX="308.0" layoutY="155.0" prefHeight="437.0" prefWidth="759.0" visible="false">
+            <AnchorPane fx:id="employee_pane" layoutX="308.0" layoutY="155.0" prefHeight="437.0" prefWidth="759.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
                <children>
                   <Label layoutX="27.0" layoutY="18.0" text="EMPLOYEE INFORMATION" underline="true">
                      <font>
@@ -95,6 +106,181 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="model_pane" layoutX="308.0" layoutY="155.0" prefHeight="449.0" prefWidth="680.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
+               <children>
+                  <Label layoutX="49.0" layoutY="23.0" text="MODEL INFORMATION" underline="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="59.0" layoutY="139.0" text="MODEL NAME">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="59.0" layoutY="103.0" text="SL NO">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="sl_no" layoutX="219.0" layoutY="99.0" onMouseClicked="#generate_sl_no" prefHeight="25.0" prefWidth="203.0" promptText="SL NO">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="model_name" layoutX="220.0" layoutY="133.0" prefHeight="25.0" prefWidth="203.0" promptText="MODEL NAME">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="model_number" layoutX="221.0" layoutY="168.0" prefHeight="25.0" prefWidth="203.0" promptText="MODEL NUMBER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="60.0" layoutY="174.0" text="MODEL NUMBER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="211.0" text="SERVICE DURATION">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="hrs" layoutX="221.0" layoutY="204.0" onKeyReleased="#hrs_to_mon" prefHeight="30.0" prefWidth="102.0" promptText="IN HRS">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="mnths" layoutX="324.0" layoutY="204.0" onKeyReleased="#hrs_to_mon" prefHeight="30.0" prefWidth="102.0" promptText="IN MONTHS">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Button layoutX="222.0" layoutY="260.0" mnemonicParsing="false" onAction="#add_models" prefHeight="37.0" prefWidth="103.0" text="ADD">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="331.0" layoutY="260.0" mnemonicParsing="false" onAction="#view_models" prefHeight="37.0" prefWidth="103.0" text="VIEW">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="cust_pane" layoutX="279.0" layoutY="155.0" prefHeight="444.0" prefWidth="748.0" visible="false" style="-fx-border-color: #000000; -fx-border-radius: 5px;">
+               <children>
+                  <Label layoutX="49.0" layoutY="23.0" text="ADD CUSTOMERS" underline="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="98.0" text="ID">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="136.0" text="DATE OF SALE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="49.0" layoutY="176.0" text="CUSTOMER NAME">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="51.0" layoutY="216.0" text="FATHER NAME">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="255.0" text="VILLAGE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="415.0" layoutY="99.0" text="TEHLSI">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="415.0" layoutY="139.0" text="MOBILE NUMBER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="414.0" layoutY="176.0" text="MODEL">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="415.0" layoutY="216.0" text="ENGINE NUMBER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="415.0" layoutY="256.0" text="FILE NUMBER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="cust_id" layoutX="173.0" layoutY="94.0" onMouseClicked="#gen_cust_id" prefHeight="30.0" prefWidth="192.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <DatePicker fx:id="date_of_sale" layoutX="174.0" layoutY="130.0" prefHeight="31.0" prefWidth="191.0" />
+                  <TextField fx:id="cust_name" layoutX="174.0" layoutY="169.0" prefHeight="30.0" prefWidth="193.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="father_name" layoutX="174.0" layoutY="209.0" prefHeight="30.0" prefWidth="193.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="village" layoutX="174.0" layoutY="249.0" prefHeight="30.0" prefWidth="193.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="tehlsi" layoutX="537.0" layoutY="94.0" prefHeight="30.0" prefWidth="192.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="mobile_number" layoutX="537.0" layoutY="131.0" prefHeight="30.0" prefWidth="192.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <ComboBox fx:id="model" layoutX="537.0" layoutY="170.0" prefHeight="29.0" prefWidth="191.0" />
+                  <TextField fx:id="engine_number" layoutX="537.0" layoutY="210.0" prefHeight="30.0" prefWidth="192.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="file_number" layoutX="538.0" layoutY="249.0" prefHeight="30.0" prefWidth="192.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Button layoutX="228.0" layoutY="324.0" mnemonicParsing="false" onAction="#add_customers" prefHeight="38.0" prefWidth="151.0" text="ADD">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="402.0" layoutY="324.0" mnemonicParsing="false" onAction="#view_customers" prefHeight="38.0" prefWidth="151.0" text="VIEW">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
     </children>

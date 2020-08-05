@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Models">
+    <children>
+        <Label layoutX="339.0" layoutY="15.0" prefHeight="25.0" text="MODEL DETAILS" underline="true">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Button layoutX="301.0" layoutY="50.0" mnemonicParsing="false" onAction="#gen_model_rep" text="VIEW REPORT">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font></Button>
+        <Button layoutX="439.0" layoutY="50.0" mnemonicParsing="false" onAction="#modelReprtPDF" text="PRINT REPORT">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Pane fx:id="view_reg_pane" layoutX="20.0" layoutY="90.0" prefHeight="251.0" prefWidth="900.0" />
+        <Button layoutX="20.0" layoutY="352.0" mnemonicParsing="false" onAction="#edit_model" prefHeight="30.0" prefWidth="119.0" text="EDIT">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Button layoutX="147.0" layoutY="352.0" mnemonicParsing="false" onAction="#delete_model" prefHeight="30.0" prefWidth="119.0" text="DELETE">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Pane fx:id="edit_pane" layoutX="147.0" layoutY="427.0" prefHeight="230.0" prefWidth="785.0" visible="false">
+            <children>
+                <Label layoutX="32.0" layoutY="27.0" text="SL NO">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="30.0" layoutY="64.0" text="MODEL NAME">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="393.0" layoutY="27.0" text="MODEL NUMBER">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+                <Label layoutX="393.0" layoutY="64.0" text="SERVICE DURATION">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Label>
+
+
+                <TextField fx:id="sl_no" editable="false" layoutX="155.0" layoutY="22.0" prefHeight="25" prefWidth="200" promptText="SL NO">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="model_name" layoutX="155.0" layoutY="59.0" prefHeight="25" prefWidth="200" promptText="MODEL NAME">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="model_no" layoutX="527.0" layoutY="23.0" prefHeight="29.0" prefWidth="200" promptText="MODEL NUMBER">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="hrs" layoutX="528.0" layoutY="60.0" onKeyReleased="#hrs_to_mon" prefHeight="29.0" prefWidth="96.0" promptText="IN HRS">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="mnths" layoutX="625.0" layoutY="60.0" onKeyReleased="#hrs_to_mon" prefHeight="29.0" prefWidth="105.0" promptText="IN MONTHS ">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </TextField>
+                <Button layoutX="345.0" layoutY="115.0" mnemonicParsing="false" onAction="#save_model" prefHeight="30.0" prefWidth="119.0" text="SAVE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
