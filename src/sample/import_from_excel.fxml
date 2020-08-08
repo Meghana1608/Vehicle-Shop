@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="430.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ImportFromExcel">
+
+
+    <Label layoutX="135.0" layoutY="27.0" text="ADDING CUSTOMER DETAILS BY EXCEL OR .CSV SHEET" underline="true">
+        <font>
+            <Font name="System Bold" size="17.0" />
+        </font>
+    </Label>
+
+    <Label layoutX="50.0" layoutY="99.0" prefHeight="30" prefWidth="150.0" text="CREATE TEMPLATE  FILE">
+        <font>
+            <Font name="System Bold" size="13.0" />
+        </font>
+    </Label>
+
+    <Label layoutX="50.0" layoutY="166.0" prefHeight="30" prefWidth="150" text="SELECT FILE TO IMPORT">
+        <font>
+            <Font name="System Bold" size="13.0" />
+        </font>
+    </Label>
+
+    <Label fx:id="path_label" layoutX="396.0" layoutY="53.0" prefHeight="30">
+        <font>
+            <Font name="System Bold" size="12" />
+        </font>
+    </Label>
+      <Button layoutX="240.0" layoutY="99.0" mnemonicParsing="false" onAction="#createTemplteExcel" prefHeight="37.0" prefWidth="138.0" text="CREATE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+    <Button layoutX="240.0" layoutY="166.0" mnemonicParsing="false" onAction="#updateCustomer" prefHeight="37.0" prefWidth="138.0" text="SELECT FILE">
+        <font>
+            <Font name="System Bold" size="14.0" />
+        </font>
+    </Button>
+
+</AnchorPane>

@@ -37,16 +37,6 @@ public class Home implements Initializable {
     public TextField employee_name;
     public TextField employee_number;
     public TextField password;
-    public Pane view_reg_pane;
-    public Pane edit_pane;
-    public TextField employee_Id;
-    public TextField email_id;
-    public TextField m_no;
-    public TextField address;
-    public TextField old_username;
-    public TextField new_username;
-    public TextField c_password;
-    public AnchorPane rootPane;
     public AnchorPane model_pane;
     public TextField sl_no;
     public TextField model_name;
@@ -64,11 +54,15 @@ public class Home implements Initializable {
     public ComboBox model;
     public TextField engine_number;
     public TextField file_number;
-    Connection connection = null;
-    public static String idArray = "";
+    public TextField model_number1;
+    public DatePicker service_date;
+
     public static int incidArray;
+    Connection connection = null;
     public  static LocalDate today = LocalDate.now(ZoneId.of("Indian/Maldives"));
 
+
+   //to choose value from combo box
     public void perform(ActionEvent actionEvent) throws IOException {
         String string1=comboo.getValue().toString();
         switch (string1){
@@ -114,11 +108,12 @@ public class Home implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboo.getItems().removeAll(comboo.getItems());
-        comboo.getItems().addAll("My Profile", "Change Password","Logout", "Exit");
-       // comboo.getSelectionModel().select("Select");
-
+        comboo.getItems().addAll("My Account","My Profile", "Change Password","Logout", "Exit");
+        comboo.getSelectionModel().select("My Account");
     }
 
+
+    // start of employee
     public void open_employee(ActionEvent actionEvent) {
 
         employee_pane.setVisible(true);
@@ -182,23 +177,15 @@ public class Home implements Initializable {
         if (employee_name.getText().trim().isEmpty()) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("PLEASE ENTER EMPLOYEE NAME");
-            alert1.showAndWait();}
+            alert1.showAndWait();
+        }
 
-//        } else if (!Password.getText().trim().equals(Confpassword.getText().trim())) {
-//            Alert alert1 = new Alert(Alert.AlertType.ERROR);
-//            alert1.setContentText("PASSWORD AND CONFIRM PASSWORD NOT EQUAL");
-//            alert1.showAndWait(); }
 
          else if (employee_number.getText().trim().isEmpty() || employee_number.getText().trim().length() != 10) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("ENTER VALID MOBILE NUMBER");
-            alert1.showAndWait(); }
-
-//         else if (Empaddress.getText().trim().isEmpty()) {
-//            Alert alert1 = new Alert(Alert.AlertType.ERROR);
-//            alert1.setContentText("PLEASE ENTER ADDRESS");
-//            alert1.showAndWait();
-//        }
+            alert1.showAndWait();
+         }
 
          else if (employee_found == true) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
@@ -253,14 +240,13 @@ public class Home implements Initializable {
                     e.printStackTrace();
                 } } } }
 
-                void refresh_employee(){
-                    employee_id.clear();
-                    employee_name.clear();
-                    employee_number.clear();
-                    password.clear();
-                }
 
-
+    void refresh_employee(){
+        employee_id.clear();
+        employee_name.clear();
+        employee_number.clear();
+        password.clear();
+    }
 
     public void view_emp(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("employee.fxml"));
@@ -272,6 +258,8 @@ public class Home implements Initializable {
         stage.show();
     }
 
+
+    // start of model
     public void open_model(ActionEvent actionEvent) {
         model_pane.setVisible(true);
         employee_pane.setVisible(false);
@@ -395,6 +383,8 @@ public class Home implements Initializable {
         }
     }
 
+
+    // start of customer
     public void open_cust(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         employee_pane.setVisible(false);
         model_pane.setVisible(false);
@@ -505,7 +495,7 @@ public class Home implements Initializable {
                 int i = 0;
 
                 String query1 = "Insert into customers(id, date_of_sale, customer_name, father_name, " +
-                        "village, tehlsi, mobile_number, model, engine_number, file_number) values(?,?,?,?,?   ,?,?,?,?,?)";
+                        "village, tehlsi, mobile_number, model, engine_number, file_number, model_number, service_date) values(?,?,?,?,?   ,?,?,?,?,?,  ?,?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
                 preparedStatement1.setString(1, cust_id.getText().trim());
                 preparedStatement1.setString(2, String.valueOf(date_of_sale.getValue()));
@@ -517,6 +507,9 @@ public class Home implements Initializable {
                 preparedStatement1.setString(8, String.valueOf(model.getValue()));
                 preparedStatement1.setString(9, engine_number.getText().trim());
                 preparedStatement1.setString(10, file_number.getText().trim());
+                preparedStatement1.setString(11, model_number1.getText().trim());
+                preparedStatement1.setString(12, String.valueOf(service_date.getValue()));
+
 
                 i=preparedStatement1.executeUpdate();
 
@@ -551,12 +544,24 @@ public class Home implements Initializable {
         mobile_number.clear();
         engine_number.clear();
         file_number.clear();
-       date_of_sale.setValue(today);
+        date_of_sale.setValue(today);
+        service_date.setValue(today);
+        model_number.clear();
     }
 
 
     public void view_customers(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("customers.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        System.out.println("Customer details");
+        Stage stage = new Stage();
+        stage.setTitle("customer_details");
+        stage.setScene(new Scene(root1, 900, 700));
+        stage.show();
+    }
+
+    public void open_import_excel_file(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("import_from_excel.fxml"));
         Parent root1 = (Parent) fxmlLoader.load();
         System.out.println("Customer details");
         Stage stage = new Stage();

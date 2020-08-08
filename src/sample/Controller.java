@@ -185,7 +185,6 @@ public class Controller implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("INVALID USER");
                     alert.showAndWait();
-                    System.out.println("Meghana");
                 }
             }
         } catch (Exception e) {
@@ -282,9 +281,8 @@ public class Controller implements Initializable {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
                 Parent root1 = (Parent) fxmlLoader.load();
-                System.out.println("stock details");
                 Stage stage1 = new Stage();
-                stage1.setTitle("stock_details");
+                stage1.setTitle("Login");
                 stage1.setScene(new Scene(root1, 775, 650));
                 stage1.show();
 
@@ -295,7 +293,6 @@ public class Controller implements Initializable {
                 if (connection != null) {
                     connection.close();
                 }
-
             }
         }
 

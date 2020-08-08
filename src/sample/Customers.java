@@ -33,10 +33,14 @@ public class Customers implements Initializable {
     public TextField engine_number;
     public TextField file_number;
     public TextField customer_name;
+    public TextField model_number;
+    public DatePicker service_date;
+
+
     Connection connection = null;
     public  static LocalDate today = LocalDate.now(ZoneId.of("Indian/Maldives"));
 
-    void modelload() throws SQLException, ClassNotFoundException {
+    void modelload() throws SQLException {
         try {
             connection = DBConnection.getConnection();
             model.getItems().removeAll(model.getItems());
@@ -143,12 +147,14 @@ public class Customers implements Initializable {
                 date_of_sale.setValue(LocalDate.parse(rs.getString(2)));
                 customer_name.setText(rs.getString(3));
                 father_name.setText(rs.getString(4));
-                village.setText(rs.getString(5));
-                tehlsi.setText(rs.getString(6));
-                mobile_no.setText(rs.getString(7));
-                model.setValue(rs.getString(8));
-                engine_number.setText(rs.getString(9));
-                file_number.setText(rs.getString(10));
+                service_date.setValue(LocalDate.parse(rs.getString(5)));
+                village.setText(rs.getString(6));
+                tehlsi.setText(rs.getString(7));
+                mobile_no.setText(rs.getString(8));
+                model.setValue(rs.getString(9));
+                model_number.setText(rs.getString(10));
+                engine_number.setText(rs.getString(11));
+                file_number.setText(rs.getString(12));
             }
 
         }
@@ -194,11 +200,11 @@ public class Customers implements Initializable {
             try {
                 connection = DBConnection.getConnection();
                 int e_id = Integer.parseInt(bb.get(0));
-                String query3 = "select * from customer where e_id='" + e_id + "'";
+                String query3 = "select * from customers where e_id='" + e_id + "'";
                 ResultSet rs = connection.createStatement().executeQuery(query3);
 
 
-                String query = "delete from customerS where id='" + e_id + "'";
+                String query = "delete from customers where id='" + e_id + "'";
                 PreparedStatement ps = connection.prepareStatement(query);
                 int i = ps.executeUpdate();
 
@@ -241,7 +247,9 @@ public class Customers implements Initializable {
                         "tehlsi='"+tehlsi.getText()+"', " +
                         "mobile_number='"+mobile_no.getText()+"', " +
                         "model='"+model.getValue()+"', " +
+                        "model_number='"+model_number.getText()+"', " +
                         "engine_number='"+engine_number.getText()+"', " +
+                        "service_date='"+service_date.getValue()+"', " +
                         "file_number='" + file_number.getText().trim() + "' where id = " + cust_id.getText().trim());
 
                 int j = ps.executeUpdate();
@@ -277,16 +285,17 @@ public class Customers implements Initializable {
         mobile_no.clear();
         engine_number.clear();
         file_number.clear();
+        model_number.clear();
         date_of_sale.setValue(today);
+        service_date.setValue(today);
     }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       // view();
         try {
             modelload();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

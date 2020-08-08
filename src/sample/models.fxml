@@ -31,56 +31,56 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Button>
-        <Pane fx:id="edit_pane" layoutX="147.0" layoutY="427.0" prefHeight="230.0" prefWidth="785.0" visible="false">
+        <Pane fx:id="edit_pane" layoutX="147.0" layoutY="427.0" prefHeight="230.0" prefWidth="785.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
             <children>
-                <Label layoutX="32.0" layoutY="27.0" text="SL NO">
+                <Label layoutX="32.0" layoutY="45.0" text="SL NO">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="30.0" layoutY="64.0" text="MODEL NAME">
+                <Label layoutX="30.0" layoutY="82.0" text="MODEL NAME">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="393.0" layoutY="27.0" text="MODEL NUMBER">
+                <Label layoutX="393.0" layoutY="45.0" text="MODEL NUMBER">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
-                <Label layoutX="393.0" layoutY="64.0" text="SERVICE DURATION">
+                <Label layoutX="393.0" layoutY="82.0" text="SERVICE DURATION">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Label>
 
 
-                <TextField fx:id="sl_no" editable="false" layoutX="155.0" layoutY="22.0" prefHeight="25" prefWidth="200" promptText="SL NO">
+                <TextField fx:id="sl_no" editable="false" layoutX="155.0" layoutY="40.0" prefHeight="25" prefWidth="200" promptText="SL NO">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="model_name" layoutX="155.0" layoutY="59.0" prefHeight="25" prefWidth="200" promptText="MODEL NAME">
+                <TextField fx:id="model_name" layoutX="155.0" layoutY="77.0" prefHeight="25" prefWidth="200" promptText="MODEL NAME">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="model_no" layoutX="527.0" layoutY="23.0" prefHeight="29.0" prefWidth="200" promptText="MODEL NUMBER">
+                <TextField fx:id="model_no" layoutX="527.0" layoutY="41.0" prefHeight="29.0" prefWidth="200" promptText="MODEL NUMBER">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="hrs" layoutX="528.0" layoutY="60.0" onKeyReleased="#hrs_to_mon" prefHeight="29.0" prefWidth="96.0" promptText="IN HRS">
+                <TextField fx:id="hrs" layoutX="528.0" layoutY="78.0" onKeyReleased="#hrs_to_mon" prefHeight="29.0" prefWidth="96.0" promptText="IN HRS">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="mnths" layoutX="625.0" layoutY="60.0" onKeyReleased="#hrs_to_mon" prefHeight="29.0" prefWidth="105.0" promptText="IN MONTHS ">
+                <TextField fx:id="mnths" layoutX="625.0" layoutY="78.0" onKeyReleased="#hrs_to_mon" prefHeight="29.0" prefWidth="105.0" promptText="IN MONTHS ">
                     <font>
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </TextField>
-                <Button layoutX="345.0" layoutY="115.0" mnemonicParsing="false" onAction="#save_model" prefHeight="30.0" prefWidth="119.0" text="SAVE">
+                <Button layoutX="345.0" layoutY="133.0" mnemonicParsing="false" onAction="#save_model" prefHeight="30.0" prefWidth="119.0" text="SAVE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
