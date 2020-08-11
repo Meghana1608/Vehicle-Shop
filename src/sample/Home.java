@@ -8,15 +8,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import sample.dao.CustomerDao;
+import sample.dto.CustomerDto;
+import sample.sms.SMS;
 import sun.security.util.Password;
 
 import java.io.File;
@@ -29,6 +29,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static sample.LoadingTableViewDataSelectedRowName.Welcome;
 
 public class Home implements Initializable {
     public ComboBox comboo;
@@ -58,21 +60,28 @@ public class Home implements Initializable {
     public DatePicker service_date;
 
     public static int incidArray;
+    public AnchorPane sms_pane;
+    public DatePicker from_date;
+    public DatePicker to_date;
+    public Pane renewal_cust_pane;
+    public TextArea text_msg;
+
+
     Connection connection = null;
-    public  static LocalDate today = LocalDate.now(ZoneId.of("Indian/Maldives"));
+    public static LocalDate today = LocalDate.now(ZoneId.of("Indian/Maldives"));
 
 
-   //to choose value from combo box
+    //to choose value from combo box
     public void perform(ActionEvent actionEvent) throws IOException {
-        String string1=comboo.getValue().toString();
-        switch (string1){
+        String string1 = comboo.getValue().toString();
+        switch (string1) {
 
             case "My Profile":
-               // ((Node) actionEvent.getSource()).getScene().getWindow().hide();
+                // ((Node) actionEvent.getSource()).getScene().getWindow().hide();
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("profile.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 Stage stage = new Stage();
-                stage.setScene(new Scene(root,800,650));
+                stage.setScene(new Scene(root, 800, 650));
                 stage.show();
                 break;
             //1
@@ -82,22 +91,22 @@ public class Home implements Initializable {
                 FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("updatelogin.fxml"));
                 Parent root1 = (Parent) fxmlLoader2.load();
                 Stage stage1 = new Stage();
-                stage1.setScene(new Scene(root1,775,650));
+                stage1.setScene(new Scene(root1, 775, 650));
                 stage1.show();
                 break;
             //2
 
-            case "Logout" :
+            case "Logout":
                 ((Node) actionEvent.getSource()).getScene().getWindow().hide();
                 fxmlLoader2 = new FXMLLoader(getClass().getResource("sample.fxml"));
                 Parent root2 = (Parent) fxmlLoader2.load();
                 Stage stage2 = new Stage();
-                stage2.setScene(new Scene(root2,775,650));
+                stage2.setScene(new Scene(root2, 775, 650));
                 stage2.show();
                 break;
             //3
 
-            case "Exit" :
+            case "Exit":
                 Platform.exit();
                 break;
             //4
@@ -108,7 +117,7 @@ public class Home implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         comboo.getItems().removeAll(comboo.getItems());
-        comboo.getItems().addAll("My Account","My Profile", "Change Password","Logout", "Exit");
+        comboo.getItems().addAll("My Account", "My Profile", "Change Password", "Logout", "Exit");
         comboo.getSelectionModel().select("My Account");
     }
 
@@ -119,6 +128,7 @@ public class Home implements Initializable {
         employee_pane.setVisible(true);
         model_pane.setVisible(false);
         cust_pane.setVisible(false);
+        sms_pane.setVisible(false);
     }
 
     public void create_id(MouseEvent mouseEvent) {
@@ -143,9 +153,7 @@ public class Home implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        finally {
+        } finally {
             try {
                 if (connection != null) {
                     connection.close();
@@ -178,16 +186,11 @@ public class Home implements Initializable {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("PLEASE ENTER EMPLOYEE NAME");
             alert1.showAndWait();
-        }
-
-
-         else if (employee_number.getText().trim().isEmpty() || employee_number.getText().trim().length() != 10) {
+        } else if (employee_number.getText().trim().isEmpty() || employee_number.getText().trim().length() != 10) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("ENTER VALID MOBILE NUMBER");
             alert1.showAndWait();
-         }
-
-         else if (employee_found == true) {
+        } else if (employee_found == true) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("USERNAME ALREADY EXIST TRY WITH OTHER USERNAME");
             alert1.showAndWait();
@@ -207,7 +210,7 @@ public class Home implements Initializable {
                 preparedStatement1.setString(5, employee_number.getText().trim());
 
 
-                i=preparedStatement1.executeUpdate();
+                i = preparedStatement1.executeUpdate();
 
                 String query2 = "Insert into login(username,password,login_type) values(?,?,?)";
                 PreparedStatement preparedStatement2 = connection.prepareStatement(query2);
@@ -223,25 +226,30 @@ public class Home implements Initializable {
                     alert.setContentText("EMPLOYEE INFORMATION ADDED SUCCESSFULLY");
                     alert.showAndWait();
 
-                    refresh_employee(); }
-                else {
+                    refresh_employee();
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("ERROR IN SAVING DATA");
-                    alert.showAndWait(); }
+                    alert.showAndWait();
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) {
-                        connection.close(); }
+                        connection.close();
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                } } } }
+                }
+            }
+        }
+    }
 
 
-    void refresh_employee(){
+    void refresh_employee() {
         employee_id.clear();
         employee_name.clear();
         employee_number.clear();
@@ -264,10 +272,11 @@ public class Home implements Initializable {
         model_pane.setVisible(true);
         employee_pane.setVisible(false);
         cust_pane.setVisible(false);
+        sms_pane.setVisible(false);
     }
 
     public void hrs_to_mon(KeyEvent keyEvent) {
-        int time_in_hrs, days , months;
+        int time_in_hrs, days, months;
         time_in_hrs = Integer.parseInt(String.valueOf(hrs.getText()));
         days = (int) (time_in_hrs * 0.0417);
         months = (int) (days * 0.032855);
@@ -275,7 +284,7 @@ public class Home implements Initializable {
     }
 
 
-    void refresh_model(){
+    void refresh_model() {
         sl_no.clear();
         model_name.clear();
         model_number.clear();
@@ -289,15 +298,11 @@ public class Home implements Initializable {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("PLEASE ENTER MODEL NAME");
             alert1.showAndWait();
-        }
-
-        else if (model_number.getText().trim().isEmpty() ) {
+        } else if (model_number.getText().trim().isEmpty()) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("PLEASE ENTER MODEL NUMBER");
-            alert1.showAndWait(); 
-        }
-
-       else {
+            alert1.showAndWait();
+        } else {
             try {
                 int i = 0;
                 String query1 = "Insert into models(sl_no, model_name, model_number, service_duration_in_hrs, " +
@@ -309,31 +314,34 @@ public class Home implements Initializable {
                 preparedStatement1.setString(4, hrs.getText().trim());
                 preparedStatement1.setString(5, mnths.getText().trim());
 
-                i=preparedStatement1.executeUpdate();
+                i = preparedStatement1.executeUpdate();
 
                 if (i > 0) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("MODEL INFORMATION ADDED SUCCESSFULLY");
                     alert.showAndWait();
 
-                    refresh_model(); }
-                else {
+                    refresh_model();
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("ERROR IN SAVING DATA");
-                    alert.showAndWait(); }
+                    alert.showAndWait();
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) {
-                        connection.close(); }
+                        connection.close();
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                } } }
+                }
+            }
+        }
     }
-
 
 
     public void view_models(ActionEvent actionEvent) throws IOException {
@@ -369,9 +377,7 @@ public class Home implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        finally {
+        } finally {
             try {
                 if (connection != null) {
                     connection.close();
@@ -389,6 +395,7 @@ public class Home implements Initializable {
         employee_pane.setVisible(false);
         model_pane.setVisible(false);
         cust_pane.setVisible(true);
+        sms_pane.setVisible(false);
         modelload();
     }
 
@@ -455,9 +462,7 @@ public class Home implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        finally {
+        } finally {
             try {
                 if (connection != null) {
                     connection.close();
@@ -476,19 +481,16 @@ public class Home implements Initializable {
         if (cust_name.getText().trim().isEmpty()) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("PLEASE ENTER CUSTOMER NAME");
-            alert1.showAndWait();}
-
-        else if (mobile_number.getText().trim().isEmpty() || mobile_number.getText().trim().length() != 10) {
+            alert1.showAndWait();
+        } else if (mobile_number.getText().trim().isEmpty() || mobile_number.getText().trim().length() != 10) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("ENTER VALID MOBILE NUMBER");
-            alert1.showAndWait(); }
-
-         else if (father_name.getText().trim().isEmpty()) {
+            alert1.showAndWait();
+        } else if (father_name.getText().trim().isEmpty()) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("PLEASE ENTER FATHER NAME");
             alert1.showAndWait();
-        }
-         else {
+        } else {
 
             try {
 
@@ -511,31 +513,36 @@ public class Home implements Initializable {
                 preparedStatement1.setString(12, String.valueOf(service_date.getValue()));
 
 
-                i=preparedStatement1.executeUpdate();
+                i = preparedStatement1.executeUpdate();
 
-                if (i > 0 ) {
+                if (i > 0) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("CUSTOMER INFORMATION ADDED SUCCESSFULLY");
                     alert.showAndWait();
 
-                    refresh_customer(); }
-                else {
+                    refresh_customer();
+                } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("ERROR IN SAVING DATA");
-                    alert.showAndWait(); }
+                    alert.showAndWait();
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 try {
                     if (connection != null) {
-                        connection.close(); }
+                        connection.close();
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                } } } }
+                }
+            }
+        }
+    }
 
-    void refresh_customer(){
+    void refresh_customer() {
         cust_id.clear();
         cust_name.clear();
         father_name.clear();
@@ -568,5 +575,103 @@ public class Home implements Initializable {
         stage.setTitle("customer_details");
         stage.setScene(new Scene(root1, 900, 700));
         stage.show();
+    }
+
+
+    //send sms and to view renewal customers
+
+    public void open_sms(ActionEvent actionEvent) {
+        employee_pane.setVisible(false);
+        model_pane.setVisible(false);
+        cust_pane.setVisible(false);
+        sms_pane.setVisible(true);
+    }
+
+    public void send_msg(ActionEvent actionEvent) {
+
+            /*Optional<ButtonType> result = AlertPrint.confirmation("ARE SURE YOU WANT SEND SMS");
+
+            if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
+                //check sms table
+                customerDtos= CustomerDao.seleceAll();
+                String message="";
+                String phone="";
+                for(CustomerDto dto:customerDtos) {
+                    if(!(dto.getPhoneno().trim().isEmpty())){
+                        P.p(dto.toString());
+                       // message="Dear "+dto.getName()+", please pay your monthly bill before 15th of this month. Thank you, Amogha City Cable";
+                        P.p(">>"+message+"\nPhone"+dto.getPhoneno()+"\n\n NAME="+dto.getName());
+                        phone+=dto.getPhoneno()+" ";
+                        SMS.sendSms(dto.getPhoneno(),message);
+                    }
+
+                }
+                SMS.insert(month.toUpperCase(),year,phone);
+            }
+
+        }else{
+            AlertPrint.information("SMS ALREADY SENT FOR THIS MONTH");
+        }*/
+
+    }
+
+    public void view_renewal_custs(ActionEvent actionEvent) throws Exception {
+        try {
+            String conditions = "";
+            connection = DBConnection.getConnection();
+            if (from_date.getValue() == null &&
+                    to_date.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PLEASE SELECT DATE TO VIEW CUSTOMER RENEWALS");
+                alert.showAndWait();
+            } else {
+                if (!(from_date.getValue() == null)) {
+                    conditions = conditions + " and service_date>='" + from_date.getValue() + "' ";
+                }
+                if (!(to_date.getValue() == null)) {
+                    conditions = conditions + " and service_date<='" + to_date.getValue() + "' ";
+                }
+
+                String query = "select * from customers where  id>0 " + conditions;
+                Welcome(query, renewal_cust_pane, 300, 430);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (!connection.isClosed()) {
+                connection.close();
+            }
+        }
+    }
+
+    public void excel_renewal_custs(ActionEvent actionEvent) {
+
+        try {
+            String conditions = "";
+            connection = DBConnection.getConnection();
+
+            if (from_date.getValue() == null &&
+                    to_date.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PLEASE SELECT DATE TO VIEW CUSTOMER RENEWALS");
+                alert.showAndWait();
+            } else {
+                if (!(from_date.getValue() == null)) {
+                    conditions = conditions + " and service_date>='" + from_date.getValue() + "' ";
+                }
+                if (!(to_date.getValue() == null)) {
+                    conditions = conditions + " and service_date<='" + to_date.getValue() + "' ";
+                }
+
+                String query = "select * from customers where  id>0 " + conditions;
+                new File(Check.drive_name()+Configuring_Path.FOLDER_PATH).mkdir();
+                new File(Check.drive_name()+Configuring_Path.FOLDER_PATH+"Renewal_Customer_Details/").mkdir();
+                String path = Check.drive_name()+Configuring_Path.FOLDER_PATH+"Renewal_Customer_Details/Renewal_Customer_Details.xlsx";
+                Controller.createExcelFile(query, path);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -39,5 +39,9 @@ public class Check {
         return d;
     }
 
+    public  static void p(String string)
+    {
+        System.out.println(string);
+    }
 }
 

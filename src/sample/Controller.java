@@ -342,6 +342,64 @@ public class Controller implements Initializable {
     }
 
 
+    public static void createExcelFile(String query, String path)  {
+        Connection con = null;
+        try {
+            con = DBConnection.connect();
+
+            ResultSet rs = con.createStatement().executeQuery(query);
+
+            XSSFWorkbook wb = new XSSFWorkbook();
+            XSSFSheet sheet = wb.createSheet("Items details");
+
+            XSSFCellStyle style = wb.createCellStyle();
+            style.setFillForegroundColor(IndexedColors.CORNFLOWER_BLUE.getIndex());
+            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+            XSSFRow header = sheet.createRow(0);
+
+            for(int i=0; i<rs.getMetaData().getColumnCount();i++)
+            {
+                String colname=rs.getMetaData().getColumnName(i+1);
+                header.createCell(i).setCellValue(colname.toUpperCase());
+                header.getCell(i).setCellStyle(style);
+            }
+
+
+            int index = 1;
+            while (rs.next()) {
+                XSSFRow row = sheet.createRow(index);
+                for (int j=0;j<rs.getMetaData().getColumnCount();j++)
+                {
+                    row.createCell(j).setCellValue(rs.getString(j+1));
+                }
+
+                index++;
+            }
+
+
+            FileOutputStream fileOut = new FileOutputStream(path);
+            wb.write(fileOut);
+            fileOut.close();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Details Exported to excel sheet and stored in "+path);
+            alert.showAndWait();
+
+            Desktop dt = Desktop.getDesktop();
+            dt.open(new File(path));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if(con.isClosed()) { con.close(); }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
