@@ -65,6 +65,13 @@ public class Home implements Initializable {
     public DatePicker to_date;
     public Pane renewal_cust_pane;
     public TextArea text_msg;
+    public AnchorPane renewal_pane;
+    public TextField cust_nameee;
+    public TextField cust_mobileee;
+    public TextField cust_engineee;
+    public TextField cust_modelll;
+    public DatePicker cust_serviceee;
+    public Pane view_renewal_cust;
 
 
     Connection connection = null;
@@ -129,6 +136,7 @@ public class Home implements Initializable {
         model_pane.setVisible(false);
         cust_pane.setVisible(false);
         sms_pane.setVisible(false);
+        renewal_pane.setVisible(false);
     }
 
     public void create_id(MouseEvent mouseEvent) {
@@ -273,6 +281,7 @@ public class Home implements Initializable {
         employee_pane.setVisible(false);
         cust_pane.setVisible(false);
         sms_pane.setVisible(false);
+        renewal_pane.setVisible(false);
     }
 
     public void hrs_to_mon(KeyEvent keyEvent) {
@@ -396,6 +405,7 @@ public class Home implements Initializable {
         model_pane.setVisible(false);
         cust_pane.setVisible(true);
         sms_pane.setVisible(false);
+        renewal_pane.setVisible(false);
         modelload();
     }
 
@@ -553,7 +563,7 @@ public class Home implements Initializable {
         file_number.clear();
         date_of_sale.setValue(today);
         service_date.setValue(today);
-        model_number.clear();
+        model_number1.clear();
     }
 
 
@@ -585,33 +595,32 @@ public class Home implements Initializable {
         model_pane.setVisible(false);
         cust_pane.setVisible(false);
         sms_pane.setVisible(true);
+        renewal_pane.setVisible(false);
     }
 
+  
     public void send_msg(ActionEvent actionEvent) {
 
-            /*Optional<ButtonType> result = AlertPrint.confirmation("ARE SURE YOU WANT SEND SMS");
-
-            if ((result.isPresent()) && (result.get() == ButtonType.OK)) {
-                //check sms table
-                customerDtos= CustomerDao.seleceAll();
-                String message="";
-                String phone="";
-                for(CustomerDto dto:customerDtos) {
-                    if(!(dto.getPhoneno().trim().isEmpty())){
-                        P.p(dto.toString());
-                       // message="Dear "+dto.getName()+", please pay your monthly bill before 15th of this month. Thank you, Amogha City Cable";
-                        P.p(">>"+message+"\nPhone"+dto.getPhoneno()+"\n\n NAME="+dto.getName());
-                        phone+=dto.getPhoneno()+" ";
-                        SMS.sendSms(dto.getPhoneno(),message);
+        if(!(text_msg.getText().isEmpty())) {
+            try {
+                String query = "Select mobile_number from customers where service_date>='" + from_date.getValue() + "' and  service_date<='" + to_date.getValue() + "'";
+                connection = DBConnection.connect();
+                ResultSet rs = connection.prepareStatement(query).executeQuery();
+                while (rs.next()) {
+                    if (!(rs.getString(1).isEmpty()) && rs.getString(1).trim().length() >= 10) {
+                        SMS.sendSms(rs.getString(1),text_msg.getText());
                     }
-
                 }
-                SMS.insert(month.toUpperCase(),year,phone);
+                text_msg.clear();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        }else{
-            AlertPrint.information("SMS ALREADY SENT FOR THIS MONTH");
-        }*/
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("ENTER MESSAGE CONTENT");
+            alert.showAndWait();
+        }
 
     }
 
@@ -673,5 +682,62 @@ public class Home implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void open_renewal_pane(ActionEvent actionEvent) {
+        renewal_pane.setVisible(true);
+        employee_pane.setVisible(false);
+        model_pane.setVisible(false);
+        cust_pane.setVisible(false);
+        sms_pane.setVisible(false);
+    }
+
+    public void search_renewal_cust(ActionEvent actionEvent) throws SQLException {
+        try {
+            String conditions = "";
+            connection = DBConnection.getConnection();
+            if (cust_nameee.getText().trim().isEmpty() &&
+                    cust_mobileee.getText().trim().isEmpty() &&
+                    cust_engineee.getText().trim().isEmpty() &&
+                    cust_modelll.getText().trim().isEmpty() &&
+                    cust_serviceee.getValue() == null )
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PLEASE ENTER AT LEAST CUSTOMER NAME, MOBILE NUMBER, SERVICE DATE, MODEL NUMBER OR ENGINE NUMBER TO VIEW AND UPDATE CUSTOMER SERVICE DATE");
+                alert.showAndWait();
+            } else {
+                if (!(cust_nameee.getText().trim().isEmpty())) {
+                    conditions = conditions + " and customer_name ='" + cust_nameee.getText() + "' ";
+                }
+                if (!(cust_mobileee.getText().trim().isEmpty())) {
+                    conditions = conditions + " and mobile_number ='" + cust_mobileee.getText() + "' ";
+                }
+                if (!(cust_engineee.getText().trim().isEmpty())) {
+                    conditions = conditions + " and engine_number ='" + cust_engineee.getText() + "' ";
+                }
+                if (!(cust_modelll.getText().trim().isEmpty())) {
+                    conditions = conditions + " and model_number ='" + cust_modelll.getText() + "' ";
+                }
+                if (!(cust_serviceee.getValue() == null)) {
+                    conditions = conditions + " and service_date ='" + cust_serviceee.getValue() + "' ";
+                }
+
+                String query = "select * from customers where  id>0 " + conditions;
+                Welcome(query, view_renewal_cust, 225, 600);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (!connection.isClosed()) {
+                connection.close();
+            }
+        }
+
+
+    }
+
+    public void update_service_date(ActionEvent actionEvent) {
+
+
     }
 }

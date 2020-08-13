@@ -28,7 +28,7 @@ public class SMS {
             InetAddress ipAddr = InetAddress.getLocalHost();
             System.out.println("IP address = " + ipAddr.getHostAddress());
             Check.p(">>>>>>>>>>>>>>>>>>>>>>>>>>"+message);
-            URL_OpenWeatherMap_weather_London_uk = "http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=A2bd97ea5e2f757dd41fe134e497daca4&sender="+sender+"&to="+phone+"&message="+message;
+            URL_OpenWeatherMap_weather_London_uk = "http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=&sender="+sender+"&to="+phone+"&message="+message;
 
             Check.p("  "+URL_OpenWeatherMap_weather_London_uk);
         } catch (UnknownHostException ex) {
