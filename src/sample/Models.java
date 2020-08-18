@@ -25,6 +25,7 @@ public class Models {
     public TextField model_no;
     public TextField hrs;
     public TextField mnths;
+    public TextField days;
     Connection connection = null;
 
     public void view()
@@ -55,10 +56,11 @@ public class Models {
 
 
     public void hrs_to_mon(KeyEvent keyEvent) {
-        int time_in_hrs, days , months;
+        int time_in_hrs, days1 , months;
         time_in_hrs = Integer.parseInt(String.valueOf(hrs.getText()));
-        days = (int) (time_in_hrs * 0.0417);
-        months = (int) (days * 0.032855);
+        days1 = (int) (time_in_hrs * 0.0417);
+        days.setText(String.valueOf(days1));
+        months = (int) (days1 * 0.032855);
         mnths.setText(String.valueOf(months));
     }
 
@@ -101,7 +103,8 @@ public class Models {
                 model_name.setText(rs.getString(2));
                 model_no.setText(rs.getString(3));
                 hrs.setText(rs.getString(4));
-                mnths.setText(rs.getString(5));
+                days.setText(rs.getString(5));
+                mnths.setText(rs.getString(6));
             }
         }
         catch (Exception e)
@@ -180,6 +183,7 @@ public class Models {
                         "model_name='"+model_name.getText().trim()+"', " +
                         "model_number='"+model_no.getText()+"', " +
                         "service_duration_in_hrs='" + hrs.getText().trim() + "'," +
+                        "service_duration_in_days='" +days.getText().trim() +"'," +
                         "service_duration_in_months='" + mnths.getText().trim() + "' where sl_no = " + sl_no.getText().trim());
 
                 int j = ps.executeUpdate();
@@ -213,5 +217,6 @@ public class Models {
         model_no.clear();
         hrs.clear();
         mnths.clear();
+        days.clear();
     }
 }

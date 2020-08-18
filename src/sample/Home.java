@@ -25,9 +25,12 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import static sample.LoadingTableViewDataSelectedRowName.Welcome;
@@ -72,10 +75,14 @@ public class Home implements Initializable {
     public TextField cust_modelll;
     public DatePicker cust_serviceee;
     public Pane view_renewal_cust;
+    public TextField days;
+    public TextArea feedback_box;
+    public TextArea feedback;
 
 
     Connection connection = null;
     public static LocalDate today = LocalDate.now(ZoneId.of("Indian/Maldives"));
+    private Object Date;
 
 
     //to choose value from combo box
@@ -285,10 +292,11 @@ public class Home implements Initializable {
     }
 
     public void hrs_to_mon(KeyEvent keyEvent) {
-        int time_in_hrs, days, months;
+        int time_in_hrs, days1, months;
         time_in_hrs = Integer.parseInt(String.valueOf(hrs.getText()));
-        days = (int) (time_in_hrs * 0.0417);
-        months = (int) (days * 0.032855);
+        days1 = (int) (time_in_hrs * 0.0417);
+        days.setText(String.valueOf(days1));
+        months = (int) (days1 * 0.032855);
         mnths.setText(String.valueOf(months));
     }
 
@@ -299,10 +307,12 @@ public class Home implements Initializable {
         model_number.clear();
         hrs.clear();
         mnths.clear();
+        days.clear();
     }
 
     public void add_models(ActionEvent actionEvent) throws Exception {
         connection = DBConnection.getConnection();
+
         if (model_name.getText().trim().isEmpty()) {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("PLEASE ENTER MODEL NAME");
@@ -315,13 +325,14 @@ public class Home implements Initializable {
             try {
                 int i = 0;
                 String query1 = "Insert into models(sl_no, model_name, model_number, service_duration_in_hrs, " +
-                        "service_duration_in_months) values(?,?,?,?,?)";
+                        "service_duration_in_months,service_duration_in_days) values(?,?,?,?,?,   ?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
                 preparedStatement1.setString(1, sl_no.getText().trim());
                 preparedStatement1.setString(2, model_name.getText().trim());
                 preparedStatement1.setString(3, model_number.getText().trim());
                 preparedStatement1.setString(4, hrs.getText().trim());
                 preparedStatement1.setString(5, mnths.getText().trim());
+                preparedStatement1.setString(6, days.getText());
 
                 i = preparedStatement1.executeUpdate();
 
@@ -344,7 +355,6 @@ public class Home implements Initializable {
                     if (connection != null) {
                         connection.close();
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -507,7 +517,7 @@ public class Home implements Initializable {
                 int i = 0;
 
                 String query1 = "Insert into customers(id, date_of_sale, customer_name, father_name, " +
-                        "village, tehlsi, mobile_number, model, engine_number, file_number, model_number, service_date) values(?,?,?,?,?   ,?,?,?,?,?,  ?,?)";
+                        "village, tehlsi, mobile_number, model, engine_number, file_number, model_number, service_date, feedback) values(?,?,?,?,?   ,?,?,?,?,?,  ?,?,?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
                 preparedStatement1.setString(1, cust_id.getText().trim());
                 preparedStatement1.setString(2, String.valueOf(date_of_sale.getValue()));
@@ -521,6 +531,7 @@ public class Home implements Initializable {
                 preparedStatement1.setString(10, file_number.getText().trim());
                 preparedStatement1.setString(11, model_number1.getText().trim());
                 preparedStatement1.setString(12, String.valueOf(service_date.getValue()));
+                preparedStatement1.setString(13, feedback.getText());
 
 
                 i = preparedStatement1.executeUpdate();
@@ -564,6 +575,7 @@ public class Home implements Initializable {
         date_of_sale.setValue(today);
         service_date.setValue(today);
         model_number1.clear();
+        feedback.clear();
     }
 
 
@@ -598,25 +610,24 @@ public class Home implements Initializable {
         renewal_pane.setVisible(false);
     }
 
-  
+
     public void send_msg(ActionEvent actionEvent) {
 
-        if(!(text_msg.getText().isEmpty())) {
+        if (!(text_msg.getText().isEmpty())) {
             try {
                 String query = "Select mobile_number from customers where service_date>='" + from_date.getValue() + "' and  service_date<='" + to_date.getValue() + "'";
                 connection = DBConnection.connect();
                 ResultSet rs = connection.prepareStatement(query).executeQuery();
                 while (rs.next()) {
                     if (!(rs.getString(1).isEmpty()) && rs.getString(1).trim().length() >= 10) {
-                        SMS.sendSms(rs.getString(1),text_msg.getText());
+                        SMS.sendSms(rs.getString(1), text_msg.getText());
                     }
                 }
                 text_msg.clear();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else
-        {
+        } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("ENTER MESSAGE CONTENT");
             alert.showAndWait();
@@ -674,9 +685,9 @@ public class Home implements Initializable {
                 }
 
                 String query = "select * from customers where  id>0 " + conditions;
-                new File(Check.drive_name()+Configuring_Path.FOLDER_PATH).mkdir();
-                new File(Check.drive_name()+Configuring_Path.FOLDER_PATH+"Renewal_Customer_Details/").mkdir();
-                String path = Check.drive_name()+Configuring_Path.FOLDER_PATH+"Renewal_Customer_Details/Renewal_Customer_Details.xlsx";
+                new File(Check.drive_name() + Configuring_Path.FOLDER_PATH).mkdir();
+                new File(Check.drive_name() + Configuring_Path.FOLDER_PATH + "Renewal_Customer_Details/").mkdir();
+                String path = Check.drive_name() + Configuring_Path.FOLDER_PATH + "Renewal_Customer_Details/Renewal_Customer_Details.xlsx";
                 Controller.createExcelFile(query, path);
             }
         } catch (Exception e) {
@@ -694,14 +705,13 @@ public class Home implements Initializable {
 
     public void search_renewal_cust(ActionEvent actionEvent) throws SQLException {
         try {
-            String conditions = "";
+            String conditions = "", feedbackk = "";
             connection = DBConnection.getConnection();
             if (cust_nameee.getText().trim().isEmpty() &&
                     cust_mobileee.getText().trim().isEmpty() &&
                     cust_engineee.getText().trim().isEmpty() &&
                     cust_modelll.getText().trim().isEmpty() &&
-                    cust_serviceee.getValue() == null )
-            {
+                    cust_serviceee.getValue() == null) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("PLEASE ENTER AT LEAST CUSTOMER NAME, MOBILE NUMBER, SERVICE DATE, MODEL NUMBER OR ENGINE NUMBER TO VIEW AND UPDATE CUSTOMER SERVICE DATE");
                 alert.showAndWait();
@@ -723,7 +733,16 @@ public class Home implements Initializable {
                 }
 
                 String query = "select * from customers where  id>0 " + conditions;
-                Welcome(query, view_renewal_cust, 225, 600);
+                Welcome(query, view_renewal_cust, 225, 540);
+
+
+                Statement st = connection.createStatement();
+                ResultSet resultSet = st.executeQuery("select * from customers where  id>0 " + conditions);
+
+                while (resultSet.next()) {
+                    feedbackk = resultSet.getString("feedback");
+                }
+                feedback_box.setText(feedbackk);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -732,12 +751,127 @@ public class Home implements Initializable {
                 connection.close();
             }
         }
-
-
     }
 
-    public void update_service_date(ActionEvent actionEvent) {
+    public void update_service_date(ActionEvent actionEvent) throws Exception {
+        String conditions = " ", modelname = "", service = "";
+    try {
+        connection = DBConnection.getConnection();
+        if (cust_nameee.getText().trim().isEmpty() &&
+                cust_mobileee.getText().trim().isEmpty() &&
+                cust_engineee.getText().trim().isEmpty() &&
+                cust_modelll.getText().trim().isEmpty() &&
+                cust_serviceee.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("PLEASE ENTER AT LEAST CUSTOMER NAME, MOBILE NUMBER, SERVICE DATE, MODEL NUMBER OR ENGINE NUMBER TO VIEW AND UPDATE CUSTOMER SERVICE DATE");
+            alert.showAndWait();
+        } else {
+
+            if (!(cust_nameee.getText().trim().isEmpty())) {
+                conditions = conditions + " and customer_name ='" + cust_nameee.getText() + "' ";
+            }
+            if (!(cust_mobileee.getText().trim().isEmpty())) {
+                conditions = conditions + " and mobile_number ='" + cust_mobileee.getText() + "' ";
+            }
+            if (!(cust_engineee.getText().trim().isEmpty())) {
+                conditions = conditions + " and engine_number ='" + cust_engineee.getText() + "' ";
+            }
+            if (!(cust_modelll.getText().trim().isEmpty())) {
+                conditions = conditions + " and model_number ='" + cust_modelll.getText() + "' ";
+            }
+            if (!(cust_serviceee.getValue() == null)) {
+                conditions = conditions + " and service_date ='" + cust_serviceee.getValue() + "' ";
+            }
+
+            ResultSet fetch_model_name = connection.createStatement().executeQuery("select * from customers where  id>0 " + conditions);
+            while (fetch_model_name.next()) {
+                modelname = fetch_model_name.getString("model");
+                service = fetch_model_name.getString("service_date");
+            }
+
+            String modell = "", in_hrs = "", in_days = "", in_mnth = "", model_no = "";
+            ResultSet setmodell = connection.createStatement().executeQuery("select * from models where model_name='" + modelname + "'");
+            while (setmodell.next()) {
+                modell = setmodell.getString("model_name");
+                in_hrs = setmodell.getString("service_duration_in_hrs");
+                in_days = setmodell.getString("service_duration_in_days");
+                in_mnth = setmodell.getString("service_duration_in_months");
+                model_no = setmodell.getString("model_number");
+            }
+
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            Calendar c = Calendar.getInstance();
+//            c.setTime(sdf.parse(service));
+//            c.add(Calendar.DATE, 3);
+//            //String updated_service_date =service  + in_days;  ///concatenates
+//            System.out.println(c);
 
 
+            // ADDINGDAYS TO SERVICE DATE LOGIC SHOULD BE ADDED HERE
+
+            PreparedStatement ps = connection.prepareStatement("update customers set " +
+                    "feedback='"+feedback_box.getText()+"' where id > 0 " + conditions);
+
+            int j = ps.executeUpdate();
+
+            if (j > 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("CUSTOMER SERVICE DATE AND FEEDBACK UPDATED");
+                alert.showAndWait();
+            }
+        } }
+
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void update_feedback(ActionEvent actionEvent) throws Exception {
+        try {
+            connection = DBConnection.getConnection();
+        String conditions = "";
+
+        if (cust_nameee.getText().trim().isEmpty() &&
+                    cust_mobileee.getText().trim().isEmpty() &&
+                    cust_engineee.getText().trim().isEmpty() &&
+                    cust_modelll.getText().trim().isEmpty() &&
+                    cust_serviceee.getValue() == null )
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PLEASE ENTER AT LEAST CUSTOMER NAME, MOBILE NUMBER, SERVICE DATE, MODEL NUMBER OR ENGINE NUMBER TO VIEW AND UPDATE CUSTOMER SERVICE DATE");
+                alert.showAndWait();
+            } else {
+
+                if (!(cust_nameee.getText().trim().isEmpty())) {
+                    conditions = conditions + " and customer_name ='" + cust_nameee.getText() + "' ";
+                }
+                if (!(cust_mobileee.getText().trim().isEmpty())) {
+                    conditions = conditions + " and mobile_number ='" + cust_mobileee.getText() + "' ";
+                }
+                if (!(cust_engineee.getText().trim().isEmpty())) {
+                    conditions = conditions + " and engine_number ='" + cust_engineee.getText() + "' ";
+                }
+                if (!(cust_modelll.getText().trim().isEmpty())) {
+                    conditions = conditions + " and model_number ='" + cust_modelll.getText() + "' ";
+                }
+                if (!(cust_serviceee.getValue() == null)) {
+                    conditions = conditions + " and service_date ='" + cust_serviceee.getValue() + "' ";
+                }
+
+            PreparedStatement ps = connection.prepareStatement("update customers set " +
+                    "feedback='"+feedback_box.getText()+"' where id > 0 " + conditions);
+
+            int j = ps.executeUpdate();
+
+            if (j > 0) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("CUSTOMER FEEDBACK UPDATED");
+                alert.showAndWait();
+                 }
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

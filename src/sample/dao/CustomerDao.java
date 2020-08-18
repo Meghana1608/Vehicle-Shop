@@ -22,8 +22,8 @@ import java.util.ArrayList;
              query = "INSERT INTO " + tableName + " ( " +
                      " date_of_sale, customer_name, father_name, village, tehlsi, " +
                      " mobile_number, model, model_number, engine_number, " +
-                     " file_number, service_date " +
-                     " ) values (   ?,?,?,?,?,  ?,?,?,?,?,  ?  )";
+                     " file_number, service_date, feedback " +
+                     " ) values (   ?,?,?,?,?,  ?,?,?,?,?,  ?,? )";
              PreparedStatement stmt = connection.prepareStatement(query);
              stmt.setString(1, dto.getDate_of_sale());
              stmt.setString(2, dto.getCustomer_name());
@@ -35,7 +35,8 @@ import java.util.ArrayList;
              stmt.setString(8, dto.getModel_number());
              stmt.setString(9, dto.getEngine_number());
              stmt.setString(10, dto.getFile_number());
-             stmt.setString(11,dto.getServce_date());
+             stmt.setString(11, dto.getServce_date());
+             stmt.setString(12, dto.getFeedback());
 
              status = !stmt.execute();
          } catch (Exception e) {

@@ -110,7 +110,8 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="model_pane" layoutX="283.0" layoutY="155.0" prefHeight="440.0" prefWidth="733.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
+
+       <AnchorPane fx:id="model_pane" layoutX="283.0" layoutY="155.0" prefHeight="440.0" prefWidth="733.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
                <children>
                   <Label layoutX="49.0" layoutY="23.0" text="MODEL INFORMATION" underline="true">
                      <font>
@@ -162,16 +163,21 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="222.0" layoutY="260.0" mnemonicParsing="false" onAction="#add_models" prefHeight="37.0" prefWidth="103.0" text="ADD">
+                  <Button layoutX="222.0" layoutY="286.0" mnemonicParsing="false" onAction="#add_models" prefHeight="37.0" prefWidth="103.0" text="ADD">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button layoutX="331.0" layoutY="260.0" mnemonicParsing="false" onAction="#view_models" prefHeight="37.0" prefWidth="103.0" text="VIEW">
+                  <Button layoutX="331.0" layoutY="286.0" mnemonicParsing="false" onAction="#view_models" prefHeight="37.0" prefWidth="103.0" text="VIEW">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <TextField fx:id="days" layoutX="223.0" layoutY="239.0" onKeyReleased="#hrs_to_mon" prefHeight="30.0" prefWidth="202.0" promptText="IN DAYS">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
 
@@ -187,22 +193,22 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="34.0" layoutY="136.0" text="DATE OF SALE">
+                  <Label layoutX="34.0" layoutY="133.0" text="DATE OF SALE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="30.0" layoutY="176.0" text="CUSTOMER NAME">
+                  <Label layoutX="30.0" layoutY="164.0" text="CUSTOMER NAME">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="32.0" layoutY="214.0" text="FATHER NAME">
+                  <Label layoutX="32.0" layoutY="199.0" text="FATHER NAME">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="33.0" layoutY="290.0" text="VILLAGE">
+                  <Label layoutX="33.0" layoutY="266.0" text="VILLAGE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -212,22 +218,22 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="380.0" layoutY="135.0" text="MOBILE NUMBER">
+                  <Label layoutX="380.0" layoutY="131.0" text="MOBILE NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="379.0" layoutY="172.0" text="MODEL">
+                  <Label layoutX="380.0" layoutY="164.0" text="MODEL">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="379.0" layoutY="252.0" text="ENGINE NUMBER">
+                  <Label layoutX="380.0" layoutY="231.0" text="ENGINE NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="381.0" layoutY="292.0" text="FILE NUMBER">
+                  <Label layoutX="381.0" layoutY="265.0" text="FILE NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -237,18 +243,18 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="date_of_sale" layoutX="152.0" layoutY="128.0" prefHeight="31.0" prefWidth="191.0" />
-                  <TextField fx:id="cust_name" layoutX="152.0" layoutY="167.0" prefHeight="30.0" prefWidth="193.0" promptText="CUSTOMER NAME">
+                  <DatePicker fx:id="date_of_sale" layoutX="152.0" layoutY="125.0" prefHeight="31.0" prefWidth="191.0" />
+                  <TextField fx:id="cust_name" layoutX="152.0" layoutY="159.0" prefHeight="30.0" prefWidth="193.0" promptText="CUSTOMER NAME">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="father_name" layoutX="152.0" layoutY="207.0" prefHeight="30.0" prefWidth="193.0" promptText="FATHER NAME">
+                  <TextField fx:id="father_name" layoutX="152.0" layoutY="193.0" prefHeight="30.0" prefWidth="193.0" promptText="FATHER NAME">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="village" layoutX="152.0" layoutY="285.0" prefHeight="30.0" prefWidth="193.0" promptText="VILLAGE">
+                  <TextField fx:id="village" layoutX="152.0" layoutY="260.0" prefHeight="30.0" prefWidth="193.0" promptText="VILLAGE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -258,49 +264,59 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="mobile_number" layoutX="502.0" layoutY="129.0" prefHeight="30.0" prefWidth="192.0" promptText="MOBILE NUMBER">
+                  <TextField fx:id="mobile_number" layoutX="502.0" layoutY="125.0" prefHeight="30.0" prefWidth="192.0" promptText="MOBILE NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <ComboBox fx:id="model" layoutX="502.0" layoutY="168.0" prefHeight="29.0" prefWidth="191.0" />
-                  <TextField fx:id="engine_number" layoutX="503.0" layoutY="247.0" prefHeight="30.0" prefWidth="192.0" promptText="ENGINE NUMBER">
+                  <ComboBox fx:id="model" layoutX="502.0" layoutY="158.0" prefHeight="29.0" prefWidth="191.0" />
+                  <TextField fx:id="engine_number" layoutX="503.0" layoutY="223.0" prefHeight="30.0" prefWidth="192.0" promptText="ENGINE NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="file_number" layoutX="503.0" layoutY="285.0" prefHeight="30.0" prefWidth="192.0" promptText="FILE NUMBER">
+                  <TextField fx:id="file_number" layoutX="503.0" layoutY="256.0" prefHeight="30.0" prefWidth="192.0" promptText="FILE NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="69.0" layoutY="351.0" mnemonicParsing="false" onAction="#add_customers" prefHeight="38.0" prefWidth="151.0" text="ADD">
+                  <Button layoutX="69.0" layoutY="390.0" mnemonicParsing="false" onAction="#add_customers" prefHeight="38.0" prefWidth="151.0" text="ADD">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="271.0" layoutY="352.0" mnemonicParsing="false" onAction="#view_customers" prefHeight="38.0" prefWidth="151.0" text="VIEW">
+                  <Button layoutX="271.0" layoutY="391.0" mnemonicParsing="false" onAction="#view_customers" prefHeight="38.0" prefWidth="151.0" text="VIEW">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="379.0" layoutY="215.0" text="MODEL NUMBER">
+                  <Label layoutX="379.0" layoutY="195.0" text="MODEL NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="model_number1" layoutX="502.0" layoutY="207.0" prefHeight="30.0" prefWidth="192.0" promptText="MODEL NUMBER">
+                  <TextField fx:id="model_number1" layoutX="502.0" layoutY="190.0" prefHeight="30.0" prefWidth="192.0" promptText="MODEL NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="464.0" layoutY="352.0" mnemonicParsing="false" onAction="#open_import_excel_file" prefHeight="38.0" prefWidth="208.0" text="IMPORT FROM EXCEL">
+                  <Button layoutX="464.0" layoutY="390.0" mnemonicParsing="false" onAction="#open_import_excel_file" prefHeight="38.0" prefWidth="208.0" text="IMPORT FROM EXCEL">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <DatePicker fx:id="service_date" layoutX="152.0" layoutY="246.0" prefHeight="31.0" prefWidth="191.0" />
-                  <Label layoutX="31.0" layoutY="252.0" text="SERVICE DATE">
+                  <DatePicker fx:id="service_date" layoutX="152.0" layoutY="226.0" prefHeight="31.0" prefWidth="191.0" />
+                  <Label layoutX="31.0" layoutY="232.0" text="SERVICE DATE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="feedback" layoutX="503.0" layoutY="289.0" prefHeight="88.0" prefWidth="200.0" promptText="FEEDBACK">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+                  <Label layoutX="381.0" layoutY="297.0" text="FEEDBACK">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -355,7 +371,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="renewal_pane" layoutX="282.0" layoutY="156.0" prefHeight="438.0" prefWidth="733.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
+            <AnchorPane fx:id="renewal_pane" layoutX="258.0" layoutY="156.0" prefHeight="438.0" prefWidth="784.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
                <children>
                   <Label layoutX="34.0" layoutY="17.0" text="UPDATION OF RENEWAL DETAILS" underline="true">
                      <font>
@@ -392,13 +408,24 @@
                      </font>
                   </Label>
                   <DatePicker fx:id="cust_serviceee" layoutX="163.0" layoutY="117.0" prefHeight="25.0" prefWidth="167.0" />
-                  <Button layoutX="496.0" layoutY="117.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="149.0" onAction="#search_renewal_cust" text="SEARCH">
+                  <Button layoutX="496.0" layoutY="117.0" mnemonicParsing="false" onAction="#search_renewal_cust" prefHeight="30.0" prefWidth="149.0" text="SEARCH">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Pane fx:id="view_renewal_cust" layoutX="32.0" layoutY="155.0" prefHeight="216.0" prefWidth="624.0" />
-                  <Button layoutX="405.0" layoutY="390.0" mnemonicParsing="false" onAction="#update_service_date" prefHeight="35.0" prefWidth="251.0" text="UPDATE SERVICE DATE">
+                  <Pane fx:id="view_renewal_cust" layoutX="18.0" layoutY="155.0" prefHeight="216.0" prefWidth="533.0" />
+                  <Button layoutX="300.0" layoutY="389.0" mnemonicParsing="false" onAction="#update_service_date" prefHeight="35.0" prefWidth="251.0" text="UPDATE SERVICE DATE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <TextArea fx:id="feedback_box" layoutX="569.0" layoutY="210.0" prefHeight="146.0" prefWidth="202.0" style="-fx-border-radius: 5px; -fx-border-color: #000000;" />
+                  <Label layoutX="577.0" layoutY="182.0" text="FEEDBACK">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="587.0" layoutY="373.0" mnemonicParsing="false" onAction="#update_feedback" prefHeight="35.0" prefWidth="180.0" text="UPDATE FEEDBACK">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

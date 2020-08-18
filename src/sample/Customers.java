@@ -155,6 +155,7 @@ public class Customers implements Initializable {
                 model_number.setText(rs.getString(10));
                 engine_number.setText(rs.getString(11));
                 file_number.setText(rs.getString(12));
+
             }
 
         }

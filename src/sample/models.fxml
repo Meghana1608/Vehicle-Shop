@@ -80,11 +80,16 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </TextField>
-                <Button layoutX="345.0" layoutY="133.0" mnemonicParsing="false" onAction="#save_model" prefHeight="30.0" prefWidth="119.0" text="SAVE">
+                <Button layoutX="345.0" layoutY="160.0" mnemonicParsing="false" onAction="#save_model" prefHeight="30.0" prefWidth="119.0" text="SAVE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
+            <TextField fx:id="days" layoutX="531.0" layoutY="115.0" onKeyReleased="#hrs_to_mon" prefHeight="29.0" prefWidth="200.0" promptText="IN DAYS">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </TextField>
             </children>
         </Pane>
     </children>

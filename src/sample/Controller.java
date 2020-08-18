@@ -58,7 +58,6 @@ public class Controller implements Initializable {
     public String ifscpdf;
     public String termspdf;
     public String declarationpdf;
-    public String jurisidictionpdf;
     public String statee;
     public String districtt;
     public String pan_number;

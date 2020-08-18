@@ -69,6 +69,7 @@ public class ImportFromExcel {
             headerList.add("SERVICE DATE(YYYY)");
             headerList.add("SERVICE DATE(MM)");
             headerList.add("SERVICE DATE(DD)");
+            headerList.add("FEEDBACK");
 
 
             for(int i=0; i<headerList.size();i++)
@@ -409,6 +410,20 @@ public class ImportFromExcel {
                     String error = "Mistake in row : " + b + " and column 15 : cell should contain day in 'DD' pattern\n";
                     erroeLog.add(error);
                 }
+
+                //15 Customer Feedback
+                try {
+                    String aa = (getStringCelldata(row, 15));
+                    if (aa.trim().length() < 1) {
+                        dataIsCorrect = false;
+                        String error = "Mistake in row : " + (b) + " and column 16 : cell should contain Customer Feedback\n";
+                        erroeLog.add(error);
+                    }
+                } catch (Exception e) {
+                    dataIsCorrect = false;
+                    String error = "Mistake in row : " + (b) + " and column 16 : cell should contain Customer Feedback\n";
+                    erroeLog.add(error);
+                }
             }
 
 
@@ -513,8 +528,9 @@ public class ImportFromExcel {
                 //11 file_number
 
                 String file_number = (getStringCelldata(row, 11));
-                System.out.println("file_number" + model_number);
+                System.out.println("file_number" + file_number);
                 dto.setFile_number(file_number);
+
 
                 //12 service date year
                 date1 = "";
@@ -536,6 +552,14 @@ public class ImportFromExcel {
                 date1 = date1 + "-" + pd1;
                 dto.setService_date(date1);
                 System.out.println("Date" + pd1);
+
+
+                //15 feedback
+
+                String feedback = (getStringCelldata(row, 15));
+                System.out.println("feedback" + feedback);
+                dto.setFeedback(feedback);
+
                 b = d.insert(dto);
             }
 

@@ -31,7 +31,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Button>
-        <Pane fx:id="edit_pane" layoutX="92.0" layoutY="408.0" prefHeight="283.0" prefWidth="785.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;">
+        <Pane fx:id="edit_pane" layoutX="92.0" layoutY="408.0" prefHeight="283.0" prefWidth="785.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
             <children>
                 <Label layoutX="15.0" layoutY="37.0" text="ID">
                     <font>

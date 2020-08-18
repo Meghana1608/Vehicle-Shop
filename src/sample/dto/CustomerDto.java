@@ -13,6 +13,7 @@ public class CustomerDto {
     private String engine_number;
     private String file_number;
     private String service_date;
+    private String feedback;
     private int id;
 
     public CustomerDto() {
@@ -27,6 +28,7 @@ public class CustomerDto {
         engine_number = "";
         file_number = "";
         service_date = "";
+        feedback = "";
         id = 0;
     }
 
@@ -114,6 +116,10 @@ public class CustomerDto {
 
     public void setService_date(String service_date){ this.service_date = service_date; }
 
+    public String getFeedback(){ return  feedback;}
+
+    public void setFeedback(String feedback){ this.feedback = feedback; }
+
     public int getId() {
         return id;
     }
@@ -137,6 +143,7 @@ public class CustomerDto {
                 ", model_number=" + model_number +
                 ", engine_number=" + engine_number +
                 ", file_number='" + file_number + '\'' +
+                ", feedback='" + feedback + '\'' +
                 '}';
     }
 }
