@@ -201,7 +201,7 @@ public class Customers implements Initializable {
             try {
                 connection = DBConnection.getConnection();
                 int e_id = Integer.parseInt(bb.get(0));
-                String query3 = "select * from customers where e_id='" + e_id + "'";
+                String query3 = "select * from customers where id='" + e_id + "'";
                 ResultSet rs = connection.createStatement().executeQuery(query3);
 
 

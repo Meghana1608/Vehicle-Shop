@@ -20,7 +20,7 @@ public class SMS {
     static String URL_OpenWeatherMap_weather_London_uk = "";
     public static void sendSms(String phone,String message){
 
-        String sender="";
+        String sender="MITSOF";
         message=message.replace(" ","%20");
         try {
             Check.p("SMS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -28,7 +28,7 @@ public class SMS {
             InetAddress ipAddr = InetAddress.getLocalHost();
             System.out.println("IP address = " + ipAddr.getHostAddress());
             Check.p(">>>>>>>>>>>>>>>>>>>>>>>>>>"+message);
-            URL_OpenWeatherMap_weather_London_uk = "http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=&sender="+sender+"&to="+phone+"&message="+message;
+            URL_OpenWeatherMap_weather_London_uk = "http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=A77acf1b7bc5b079a849e6b141f236ca2&sender="+sender+"&to="+phone+"&message="+message;
 
             Check.p("  "+URL_OpenWeatherMap_weather_London_uk);
         } catch (UnknownHostException ex) {

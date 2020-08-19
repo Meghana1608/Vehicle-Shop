@@ -799,18 +799,21 @@ public class Home implements Initializable {
                 model_no = setmodell.getString("model_number");
             }
 
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//            Calendar c = Calendar.getInstance();
-//            c.setTime(sdf.parse(service));
-//            c.add(Calendar.DATE, 3);
-//            //String updated_service_date =service  + in_days;  ///concatenates
-//            System.out.println(c);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar c = Calendar.getInstance();
+            c.setTime(sdf.parse(service));
+            c.add(Calendar.DATE, Integer.parseInt(in_days));
+            //String updated_service_date =service  + in_days;  ///concatenates
+            String output = sdf.format(c.getTime());
+            System.out.println(output);
 
 
-            // ADDINGDAYS TO SERVICE DATE LOGIC SHOULD BE ADDED HERE
+            // ADDING DAYS TO SERVICE DATE LOGIC SHOULD BE ADDED HERE
 
             PreparedStatement ps = connection.prepareStatement("update customers set " +
-                    "feedback='"+feedback_box.getText()+"' where id > 0 " + conditions);
+                    "feedback='"+feedback_box.getText()+"', "+
+                    "service_date = '"+ output +"' where id > 0 " + conditions);
 
             int j = ps.executeUpdate();
 
