@@ -34,7 +34,7 @@ public class SMS {
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         }
-        //jsonTest();
+        jsonTest();
     }
 
     public static void jsonTest() {

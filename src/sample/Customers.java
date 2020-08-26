@@ -35,6 +35,9 @@ public class Customers implements Initializable {
     public TextField customer_name;
     public TextField model_number;
     public DatePicker service_date;
+    public TextField operator_name;
+    public TextField operator_number;
+    public TextField job_card_number;
 
 
     Connection connection = null;
@@ -149,12 +152,15 @@ public class Customers implements Initializable {
                 father_name.setText(rs.getString(4));
                 service_date.setValue(LocalDate.parse(rs.getString(5)));
                 village.setText(rs.getString(6));
-                tehlsi.setText(rs.getString(7));
-                mobile_no.setText(rs.getString(8));
-                model.setValue(rs.getString(9));
-                model_number.setText(rs.getString(10));
-                engine_number.setText(rs.getString(11));
-                file_number.setText(rs.getString(12));
+                tehlsi.setText(rs.getString(9));
+                mobile_no.setText(rs.getString(10));
+                model.setValue(rs.getString(11));
+                model_number.setText(rs.getString(12));
+                engine_number.setText(rs.getString(13));
+                file_number.setText(rs.getString(14));
+                operator_name.setText(rs.getString("operator_name"));
+                operator_number.setText(rs.getString("operator_number"));
+                job_card_number.setText(rs.getString(15));
 
             }
 
@@ -251,6 +257,9 @@ public class Customers implements Initializable {
                         "model_number='"+model_number.getText()+"', " +
                         "engine_number='"+engine_number.getText()+"', " +
                         "service_date='"+service_date.getValue()+"', " +
+                        "operator_name='"+operator_name.getText()+"', " +
+                        "operator_number='"+operator_number.getText()+"', " +
+                        "job_card_number='"+job_card_number.getText()+"', " +
                         "file_number='" + file_number.getText().trim() + "' where id = " + cust_id.getText().trim());
 
                 int j = ps.executeUpdate();
@@ -289,6 +298,9 @@ public class Customers implements Initializable {
         model_number.clear();
         date_of_sale.setValue(today);
         service_date.setValue(today);
+        job_card_number.clear();
+        operator_number.clear();
+        operator_name.clear();
     }
 
 

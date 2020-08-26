@@ -181,7 +181,7 @@
                </children>
             </AnchorPane>
 
-       <AnchorPane fx:id="cust_pane" layoutX="283.0" layoutY="155.0" prefHeight="440.0" prefWidth="735.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
+       <AnchorPane fx:id="cust_pane" layoutX="283.0" layoutY="155.0" prefHeight="505.0" prefWidth="735.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
                <children>
                   <Label layoutX="49.0" layoutY="23.0" text="ADD CUSTOMERS" underline="true">
                      <font>
@@ -208,32 +208,32 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="33.0" layoutY="266.0" text="VILLAGE">
+                  <Label layoutX="33.0" layoutY="268.0" text="VILLAGE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="380.0" layoutY="95.0" text="TEHLSI">
+                  <Label layoutX="31.0" layoutY="368.0" text="TEHLSI">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="380.0" layoutY="131.0" text="MOBILE NUMBER">
+                  <Label layoutX="380.0" layoutY="99.0" text="MOBILE NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="380.0" layoutY="164.0" text="MODEL">
+                  <Label layoutX="380.0" layoutY="132.0" text="MODEL">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="380.0" layoutY="231.0" text="ENGINE NUMBER">
+                  <Label layoutX="380.0" layoutY="199.0" text="ENGINE NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="381.0" layoutY="265.0" text="FILE NUMBER">
+                  <Label layoutX="381.0" layoutY="233.0" text="FILE NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -254,53 +254,53 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="village" layoutX="152.0" layoutY="260.0" prefHeight="30.0" prefWidth="193.0" promptText="VILLAGE">
+                  <TextField fx:id="village" layoutX="152.0" layoutY="261.0" prefHeight="30.0" prefWidth="193.0" promptText="VILLAGE">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="tehlsi" layoutX="502.0" layoutY="92.0" prefHeight="30.0" prefWidth="192.0" promptText="TEHLSI">
+                  <TextField fx:id="tehlsi" layoutX="154.0" layoutY="364.0" prefHeight="30.0" prefWidth="192.0" promptText="TEHLSI">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="mobile_number" layoutX="502.0" layoutY="125.0" prefHeight="30.0" prefWidth="192.0" promptText="MOBILE NUMBER">
+                  <TextField fx:id="mobile_number" layoutX="514.0" layoutY="93.0" prefHeight="30.0" prefWidth="192.0" promptText="MOBILE NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <ComboBox fx:id="model" layoutX="502.0" layoutY="158.0" prefHeight="29.0" prefWidth="191.0" />
-                  <TextField fx:id="engine_number" layoutX="503.0" layoutY="223.0" prefHeight="30.0" prefWidth="192.0" promptText="ENGINE NUMBER">
+                  <ComboBox fx:id="model" layoutX="514.0" layoutY="126.0" prefHeight="29.0" prefWidth="191.0" />
+                  <TextField fx:id="engine_number" layoutX="515.0" layoutY="191.0" prefHeight="30.0" prefWidth="192.0" promptText="ENGINE NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="file_number" layoutX="503.0" layoutY="256.0" prefHeight="30.0" prefWidth="192.0" promptText="FILE NUMBER">
+                  <TextField fx:id="file_number" layoutX="515.0" layoutY="224.0" prefHeight="30.0" prefWidth="192.0" promptText="FILE NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="69.0" layoutY="390.0" mnemonicParsing="false" onAction="#add_customers" prefHeight="38.0" prefWidth="151.0" text="ADD">
+                  <Button layoutX="69.0" layoutY="444.0" mnemonicParsing="false" onAction="#add_customers" prefHeight="38.0" prefWidth="151.0" text="ADD">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="271.0" layoutY="391.0" mnemonicParsing="false" onAction="#view_customers" prefHeight="38.0" prefWidth="151.0" text="VIEW">
+                  <Button layoutX="271.0" layoutY="445.0" mnemonicParsing="false" onAction="#view_customers" prefHeight="38.0" prefWidth="151.0" text="VIEW">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Label layoutX="379.0" layoutY="195.0" text="MODEL NUMBER">
+                  <Label layoutX="379.0" layoutY="163.0" text="MODEL NUMBER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="model_number1" layoutX="502.0" layoutY="190.0" prefHeight="30.0" prefWidth="192.0" promptText="MODEL NUMBER">
+                  <TextField fx:id="model_number1" layoutX="514.0" layoutY="158.0" prefHeight="30.0" prefWidth="192.0" promptText="MODEL NUMBER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="464.0" layoutY="390.0" mnemonicParsing="false" onAction="#open_import_excel_file" prefHeight="38.0" prefWidth="208.0" text="IMPORT FROM EXCEL">
+                  <Button layoutX="464.0" layoutY="446.0" mnemonicParsing="false" onAction="#open_import_excel_file" prefHeight="38.0" prefWidth="208.0" text="IMPORT FROM EXCEL">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -311,16 +311,56 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="feedback" layoutX="503.0" layoutY="289.0" prefHeight="88.0" prefWidth="200.0" promptText="FEEDBACK">
+                  <TextArea fx:id="feedback" layoutX="515.0" layoutY="290.0" prefHeight="66.0" prefWidth="192.0" promptText="CUSTOMER FEEDBACK">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </TextArea>
-                  <Label layoutX="381.0" layoutY="297.0" text="FEEDBACK">
+                  <Label layoutX="380.0" layoutY="297.0" text="CUSTOMER FEEDBACK">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
+                  <Label layoutX="379.0" layoutY="368.0" text="SERVICE FEEDBACK">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="31.0" layoutY="302.0" text="OPERATOR NAME">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="31.0" layoutY="336.0" text="OPERATOR NUMBER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="operator_name" layoutX="152.0" layoutY="295.0" prefHeight="30.0" prefWidth="193.0" promptText="OPERATOR NAME">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="operator_number" layoutX="153.0" layoutY="329.0" prefHeight="30.0" prefWidth="193.0" promptText="OPERATOR NUMBER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="381.0" layoutY="262.0" text="JOB CARD NUMBER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="job_card_number" layoutX="515.0" layoutY="257.0" prefHeight="30.0" prefWidth="192.0" promptText="JOB CARD NUMBER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextArea fx:id="service_feedback" layoutX="514.0" layoutY="359.0" prefHeight="65.0" prefWidth="192.0" promptText="SERVICE FEEDBACK">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
                </children>
             </AnchorPane>
 

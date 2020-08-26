@@ -78,6 +78,10 @@ public class Home implements Initializable {
     public TextField days;
     public TextArea feedback_box;
     public TextArea feedback;
+    public TextField operator_name;
+    public TextField operator_number;
+    public TextField job_card_number;
+    public TextArea service_feedback;
 
 
     Connection connection = null;
@@ -517,7 +521,8 @@ public class Home implements Initializable {
                 int i = 0;
 
                 String query1 = "Insert into customers(id, date_of_sale, customer_name, father_name, " +
-                        "village, tehlsi, mobile_number, model, engine_number, file_number, model_number, service_date, feedback) values(?,?,?,?,?   ,?,?,?,?,?,  ?,?,?)";
+                        "village, tehlsi, mobile_number, model, engine_number, file_number, model_number, service_date, " +
+                        "customer_feedback, service_feedback, operator_name, operator_number, job_card_number ) values(?,?,?,?,?   ,?,?,?,?,?,  ?,?,?,?,?,  ?,?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
                 preparedStatement1.setString(1, cust_id.getText().trim());
                 preparedStatement1.setString(2, String.valueOf(date_of_sale.getValue()));
@@ -532,6 +537,10 @@ public class Home implements Initializable {
                 preparedStatement1.setString(11, model_number1.getText().trim());
                 preparedStatement1.setString(12, String.valueOf(service_date.getValue()));
                 preparedStatement1.setString(13, feedback.getText());
+                preparedStatement1.setString(14, service_feedback.getText());
+                preparedStatement1.setString(15, operator_name.getText());
+                preparedStatement1.setString(16, operator_number.getText());
+                preparedStatement1.setString(17, job_card_number.getText());
 
 
                 i = preparedStatement1.executeUpdate();
@@ -576,6 +585,10 @@ public class Home implements Initializable {
         service_date.setValue(today);
         model_number1.clear();
         feedback.clear();
+        service_feedback.clear();
+        operator_name.clear();
+        operator_number.clear();
+        job_card_number.clear();
     }
 
 
