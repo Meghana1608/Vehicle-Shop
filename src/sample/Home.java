@@ -82,6 +82,7 @@ public class Home implements Initializable {
     public TextField operator_number;
     public TextField job_card_number;
     public TextArea service_feedback;
+    public TextArea service_feedback_box;
 
 
     Connection connection = null;
@@ -718,7 +719,7 @@ public class Home implements Initializable {
 
     public void search_renewal_cust(ActionEvent actionEvent) throws SQLException {
         try {
-            String conditions = "", feedbackk = "";
+            String conditions = "", feedbackk = "", service_feedbackk = "";
             connection = DBConnection.getConnection();
             if (cust_nameee.getText().trim().isEmpty() &&
                     cust_mobileee.getText().trim().isEmpty() &&
@@ -746,16 +747,18 @@ public class Home implements Initializable {
                 }
 
                 String query = "select * from customers where  id>0 " + conditions;
-                Welcome(query, view_renewal_cust, 225, 540);
+                Welcome(query, view_renewal_cust, 300, 540);
 
 
                 Statement st = connection.createStatement();
                 ResultSet resultSet = st.executeQuery("select * from customers where  id>0 " + conditions);
 
                 while (resultSet.next()) {
-                    feedbackk = resultSet.getString("feedback");
+                    feedbackk = resultSet.getString("customer_feedback");
+                    service_feedbackk = resultSet.getString("service_feedback");
                 }
                 feedback_box.setText(feedbackk);
+                service_feedback_box.setText(service_feedbackk);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -825,7 +828,8 @@ public class Home implements Initializable {
             // ADDING DAYS TO SERVICE DATE LOGIC SHOULD BE ADDED HERE
 
             PreparedStatement ps = connection.prepareStatement("update customers set " +
-                    "feedback='"+feedback_box.getText()+"', "+
+                    "customer_feedback='"+feedback_box.getText()+"', "+
+                    "service_feedback='"+service_feedback_box.getText()+"', "+
                     "service_date = '"+ output +"' where id > 0 " + conditions);
 
             int j = ps.executeUpdate();
@@ -834,7 +838,11 @@ public class Home implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("CUSTOMER SERVICE DATE AND FEEDBACK UPDATED");
                 alert.showAndWait();
+
+                search_renewal_cust(actionEvent);
             }
+
+
         } }
 
         catch(Exception e){
@@ -875,7 +883,8 @@ public class Home implements Initializable {
                 }
 
             PreparedStatement ps = connection.prepareStatement("update customers set " +
-                    "feedback='"+feedback_box.getText()+"' where id > 0 " + conditions);
+                    "customer_feedback='"+feedback_box.getText()+"', "+
+                    "service_feedback='"+service_feedback_box.getText()+"' where id > 0 " + conditions);
 
             int j = ps.executeUpdate();
 
@@ -883,11 +892,22 @@ public class Home implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("CUSTOMER FEEDBACK UPDATED");
                 alert.showAndWait();
+
+                search_renewal_cust(actionEvent);
                  }
             }
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void live_search_csname(KeyEvent keyEvent) {
+    }
+
+    public void live_search_eng_number(KeyEvent keyEvent) {
+    }
+
+    public void live_search_model_num(KeyEvent keyEvent) {
     }
 }

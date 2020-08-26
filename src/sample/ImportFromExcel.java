@@ -69,7 +69,11 @@ public class ImportFromExcel {
             headerList.add("SERVICE DATE(YYYY)");
             headerList.add("SERVICE DATE(MM)");
             headerList.add("SERVICE DATE(DD)");
-            headerList.add("FEEDBACK");
+            headerList.add("CUSTOMER FEEDBACK");
+            headerList.add("SERVICE FEEDBACK");
+            headerList.add("OPERATOR NAME");
+            headerList.add("OPERATOR NUMBER");
+            headerList.add("JOB CARD NUMBER");
 
 
             for(int i=0; i<headerList.size();i++)
@@ -334,30 +338,30 @@ public class ImportFromExcel {
                 //10 Engine number
                 try {
                     String aa = (getStringCelldata(row, 10));
-                    if (aa.trim().length() < 1) {
+                    /*if (aa.trim().length() < 1) {
                         dataIsCorrect = false;
                         String error = "Mistake in row : " + (b) + " and column 11 : cell should contain Engine number\n";
                         erroeLog.add(error);
-                    }
+                    }*/
                 } catch (Exception e) {
-                    dataIsCorrect = false;
+                    /*dataIsCorrect = false;
                     String error = "Mistake in row : " + (b) + " and column 11 : cell should contain Engine number\n";
-                    erroeLog.add(error);
+                    erroeLog.add(error);*/
                 }
 
 
                 //11 File number
                 try {
                     String aa = (getStringCelldata(row, 11));
-                    if (aa.trim().length() < 1) {
+                   /* if (aa.trim().length() < 1) {
                         dataIsCorrect = false;
                         String error = "Mistake in row : " + (b) + " and column 12 : cell should contain File number\n";
                         erroeLog.add(error);
-                    }
+                    }*/
                 } catch (Exception e) {
-                    dataIsCorrect = false;
+                   /* dataIsCorrect = false;
                     String error = "Mistake in row : " + (b) + " and column 12 : cell should contain File number\n";
-                    erroeLog.add(error);
+                    erroeLog.add(error);*/
                 }
 
                 // 12 service date yyyy
@@ -414,16 +418,71 @@ public class ImportFromExcel {
                 //15 Customer Feedback
                 try {
                     String aa = (getStringCelldata(row, 15));
-                    if (aa.trim().length() < 1) {
+                   /* if (aa.trim().length() < 1) {
                         dataIsCorrect = false;
                         String error = "Mistake in row : " + (b) + " and column 16 : cell should contain Customer Feedback\n";
                         erroeLog.add(error);
-                    }
+                    }*/
                 } catch (Exception e) {
-                    dataIsCorrect = false;
+                  /*  dataIsCorrect = false;
                     String error = "Mistake in row : " + (b) + " and column 16 : cell should contain Customer Feedback\n";
-                    erroeLog.add(error);
+                    erroeLog.add(error);*/
                 }
+
+                //16  Service Feedback
+                try {
+                    String aa = (getStringCelldata(row, 16));
+                    /*if (aa.trim().length() < 1) {
+                        String error = "Mistake in row : " + (b) + " and column 16 : cell should contain Service Feedback \n";
+                        erroeLog.add(error);
+                    }*/
+                } catch (Exception e) {
+                   /* dataIsCorrect = false;
+                    String error = "Mistake in row : " + (b) + " and column 4 : cell should contain Service Feedback\n";
+                    erroeLog.add(error);*/
+                }
+
+                //17  Operator Name
+                try {
+                    String aa = (getStringCelldata(row, 17));
+                   /* if (aa.trim().length() < 1) {
+                        String error = "Mistake in row : " + (b) + " and column 17 : cell should contain Operator name \n";
+                        erroeLog.add(error);
+                    }*/
+                } catch (Exception e) {
+                    /*dataIsCorrect = false;
+                    String error = "Mistake in row : " + (b) + " and column 17 : cell should contain Operator name\n";
+                    erroeLog.add(error);
+                */
+                }
+
+
+                //18  Operator number
+                try {
+                    String aa = (getStringCelldata(row, 18));
+/*                    if (aa.trim().length() < 1) {
+                        String error = "Mistake in row : " + (b) + " and column 18 : cell should contain Operator number \n";
+                        erroeLog.add(error);
+                    }*/
+                } catch (Exception e) {
+/*                    dataIsCorrect = false;
+                    String error = "Mistake in row : " + (b) + " and column 18 : cell should contain Operator number\n";
+                    erroeLog.add(error);*/
+                }
+
+                //19  Job card number
+                try {
+                    String aa = (getStringCelldata(row, 19));
+                    /*if (aa.trim().length() < 1) {
+                        String error = "Mistake in row : " + (b) + " and column 19 : cell should contain Job card number \n";
+                        erroeLog.add(error);
+                    }*/
+                } catch (Exception e) {
+                    /*dataIsCorrect = false;
+                    String error = "Mistake in row : " + (b) + " and column 19 : cell should contain Job card number\n";
+                    erroeLog.add(error);*/
+                }
+
             }
 
 
@@ -560,6 +619,34 @@ public class ImportFromExcel {
                 System.out.println("feedback" + feedback);
                 dto.setFeedback(feedback);
 
+
+                //16 service feedback
+
+                String service_feedback = (getStringCelldata(row, 16));
+                System.out.println("service_feedback" + service_feedback);
+                dto.setService_feedback(service_feedback);
+
+
+                // 17 operator name
+
+                String operator_name = (getStringCelldata(row, 17));
+                System.out.println("operator name" + operator_name);
+                dto.setOperator_name(operator_name);
+
+
+                // 18 operator number
+
+                String operator_number = (getStringCelldata(row, 18));
+                System.out.println("operator_number" + operator_number);
+                dto.setOperator_number(operator_number);
+
+
+                // 19 job card number
+
+                String job_card_number = (getStringCelldata(row, 19));
+                System.out.println("job_card" + job_card_number);
+                dto.setJob_card_number(job_card_number);
+
                 b = d.insert(dto);
             }
 
@@ -568,11 +655,10 @@ public class ImportFromExcel {
                 a.setContentText("Details Imported to Database");
                 a.showAndWait();
                 Customers cs = new Customers();
-                cs.view();
+               // cs.view();
             }
         }
     }
-
         catch (Exception e)
         {
             e.printStackTrace();

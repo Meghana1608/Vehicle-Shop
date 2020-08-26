@@ -14,6 +14,10 @@ public class CustomerDto {
     private String file_number;
     private String service_date;
     private String feedback;
+    private String service_feedback;
+    private String operator_name;
+    private String operator_number;
+    private String job_card_number;
     private int id;
 
     public CustomerDto() {
@@ -29,6 +33,10 @@ public class CustomerDto {
         file_number = "";
         service_date = "";
         feedback = "";
+        service_feedback = "";
+        operator_name = "";
+        operator_number = "";
+        job_card_number = "";
         id = 0;
     }
 
@@ -120,6 +128,38 @@ public class CustomerDto {
 
     public void setFeedback(String feedback){ this.feedback = feedback; }
 
+    public String getService_feedback() {
+        return service_feedback;
+    }
+
+    public void setService_feedback(String service_feedback) {
+        this.service_feedback = service_feedback;
+    }
+
+    public String getOperator_name() {
+        return operator_name;
+    }
+
+    public void setOperator_name(String operator_name) {
+        this.operator_name = operator_name;
+    }
+
+    public String getOperator_number() {
+        return operator_number;
+    }
+
+    public void setOperator_number(String operator_number) {
+        this.operator_number = operator_number;
+    }
+
+    public String getJob_card_number() {
+        return job_card_number;
+    }
+
+    public void setJob_card_number(String job_card_number) {
+        this.job_card_number = job_card_number;
+    }
+
     public int getId() {
         return id;
     }
@@ -143,7 +183,11 @@ public class CustomerDto {
                 ", model_number=" + model_number +
                 ", engine_number=" + engine_number +
                 ", file_number='" + file_number + '\'' +
-                ", feedback='" + feedback + '\'' +
+                ", customer_feedback='" + feedback + '\'' +
+                ", service_feedback='" + service_feedback + '\'' +
+                ", operator_name='" + operator_name + '\'' +
+                ", operator_number='" + operator_number + '\'' +
+                ", job_card_number='" + job_card_number + '\'' +
                 '}';
     }
 }
