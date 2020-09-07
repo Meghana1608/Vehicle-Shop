@@ -56,12 +56,13 @@ public class Models {
 
 
     public void hrs_to_mon(KeyEvent keyEvent) {
-        int time_in_hrs, days1 , months;
-        time_in_hrs = Integer.parseInt(String.valueOf(hrs.getText()));
-        days1 = (int) (time_in_hrs * 0.0417);
-        days.setText(String.valueOf(days1));
-        months = (int) (days1 * 0.032855);
-        mnths.setText(String.valueOf(months));
+//        int time_in_hrs, days1 , months;
+//        time_in_hrs = Integer.parseInt(String.valueOf(hrs.getText()));
+//        days1 = (int) (time_in_hrs * 0.0417);
+//        days.setText(String.valueOf(days1));
+//        months = (int) (days1 * 0.032855);
+//        mnths.setText(String.valueOf(months));
+
     }
 
 
