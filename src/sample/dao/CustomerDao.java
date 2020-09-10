@@ -22,8 +22,8 @@ import java.util.ArrayList;
              query = "INSERT INTO " + tableName + " ( " +
                      " date_of_sale, customer_name, father_name, village, tehlsi, " +
                      " mobile_number, model, model_number, engine_number, " +
-                     " file_number, service_date, customer_feedback, service_feedback, operator_name, operator_number, job_card_number " +
-                     " ) values (   ?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?,?  ,? )";
+                     " file_number, service_date, customer_feedback, service_feedback, operator_name, operator_number, job_card_number, chassis_number, registration_number " +
+                     " ) values (   ?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?,?  ,?,?,? )";
              PreparedStatement stmt = connection.prepareStatement(query);
              stmt.setString(1, dto.getDate_of_sale());
              stmt.setString(2, dto.getCustomer_name());
@@ -41,7 +41,8 @@ import java.util.ArrayList;
              stmt.setString(14, dto.getOperator_name());
              stmt.setString(15, dto.getOperator_number());
              stmt.setString(16, dto.getJob_card_number());
-
+             stmt.setString(17, dto.getChassis_number());
+             stmt.setString(18, dto.getRegistration_number());
 
              status = !stmt.execute();
          } catch (Exception e) {

@@ -18,6 +18,8 @@ public class CustomerDto {
     private String operator_name;
     private String operator_number;
     private String job_card_number;
+    private  String registration_numberr;
+    private String chassis_numberr;
     private int id;
 
     public CustomerDto() {
@@ -37,6 +39,8 @@ public class CustomerDto {
         operator_name = "";
         operator_number = "";
         job_card_number = "";
+        chassis_numberr = "";
+        registration_numberr = "";
         id = 0;
     }
 
@@ -160,6 +164,22 @@ public class CustomerDto {
         this.job_card_number = job_card_number;
     }
 
+    public String getChassis_number() {
+        return chassis_numberr;
+    }
+
+    public void setChassis_number(String chassis_numberr) {
+        this.chassis_numberr = chassis_numberr;
+    }
+
+    public String getRegistration_number() {
+        return registration_numberr;
+    }
+
+    public void setRegistration_number(String registration_numberr) {
+        this.registration_numberr = registration_numberr;
+    }
+
     public int getId() {
         return id;
     }
@@ -188,6 +208,8 @@ public class CustomerDto {
                 ", operator_name='" + operator_name + '\'' +
                 ", operator_number='" + operator_number + '\'' +
                 ", job_card_number='" + job_card_number + '\'' +
+                ", chassis_number='" + chassis_numberr + '\'' +
+                ", registration_number='" + registration_numberr + '\'' +
                 '}';
     }
 }

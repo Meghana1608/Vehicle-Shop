@@ -38,6 +38,8 @@ public class Customers implements Initializable {
     public TextField operator_name;
     public TextField operator_number;
     public TextField job_card_number;
+    public TextField chassis_number1;
+    public TextField registration_number1;
 
 
     Connection connection = null;
@@ -161,10 +163,12 @@ public class Customers implements Initializable {
                 operator_name.setText(rs.getString("operator_name"));
                 operator_number.setText(rs.getString("operator_number"));
                 job_card_number.setText(rs.getString(15));
+                chassis_number1.setText(rs.getString("chassis_number"));
+                registration_number1.setText(rs.getString("registration_number"));
 
             }
-
         }
+
         catch (Exception e)
         {
             e.printStackTrace();
@@ -260,6 +264,8 @@ public class Customers implements Initializable {
                         "operator_name='"+operator_name.getText()+"', " +
                         "operator_number='"+operator_number.getText()+"', " +
                         "job_card_number='"+job_card_number.getText()+"', " +
+                        "chassis_number='"+chassis_number1.getText()+"', " +
+                        "registration_number='"+registration_number1.getText()+"', " +
                         "file_number='" + file_number.getText().trim() + "' where id = " + cust_id.getText().trim());
 
                 int j = ps.executeUpdate();
@@ -301,6 +307,8 @@ public class Customers implements Initializable {
         job_card_number.clear();
         operator_number.clear();
         operator_name.clear();
+        chassis_number1.clear();
+        registration_number1.clear();
     }
 
 

@@ -83,6 +83,8 @@ public class Home implements Initializable {
     public TextField job_card_number;
     public TextArea service_feedback;
     public TextArea service_feedback_box;
+    public TextField chassis_number;
+    public TextField registration_number;
 
 
     Connection connection = null;
@@ -523,7 +525,7 @@ public class Home implements Initializable {
 
                 String query1 = "Insert into customers(id, date_of_sale, customer_name, father_name, " +
                         "village, tehlsi, mobile_number, model, engine_number, file_number, model_number, service_date, " +
-                        "customer_feedback, service_feedback, operator_name, operator_number, job_card_number ) values(?,?,?,?,?   ,?,?,?,?,?,  ?,?,?,?,?,  ?,?)";
+                        "customer_feedback, service_feedback, operator_name, operator_number, job_card_number, chassis_number, registration_number ) values(?,?,?,?,?   ,?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
                 preparedStatement1.setString(1, cust_id.getText().trim());
                 preparedStatement1.setString(2, String.valueOf(date_of_sale.getValue()));
@@ -542,6 +544,8 @@ public class Home implements Initializable {
                 preparedStatement1.setString(15, operator_name.getText());
                 preparedStatement1.setString(16, operator_number.getText());
                 preparedStatement1.setString(17, job_card_number.getText());
+                preparedStatement1.setString(18, chassis_number.getText());
+                preparedStatement1.setString(19, registration_number.getText());
 
 
                 i = preparedStatement1.executeUpdate();
@@ -590,6 +594,8 @@ public class Home implements Initializable {
         operator_name.clear();
         operator_number.clear();
         job_card_number.clear();
+        chassis_number.clear();
+        registration_number.clear();
     }
 
 

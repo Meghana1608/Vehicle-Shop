@@ -181,7 +181,7 @@
                </children>
             </AnchorPane>
 
-       <AnchorPane fx:id="cust_pane" layoutX="283.0" layoutY="155.0" prefHeight="505.0" prefWidth="735.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
+       <AnchorPane fx:id="cust_pane" layoutX="283.0" layoutY="155.0" prefHeight="524.0" prefWidth="735.0" style="-fx-border-color: #000000; -fx-border-radius: 5px;" visible="false">
                <children>
                   <Label layoutX="49.0" layoutY="23.0" text="ADD CUSTOMERS" underline="true">
                      <font>
@@ -259,7 +259,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="tehlsi" layoutX="154.0" layoutY="364.0" prefHeight="30.0" prefWidth="192.0" promptText="TEHLSI">
+                  <TextField fx:id="tehlsi" layoutX="154.0" layoutY="363.0" prefHeight="30.0" prefWidth="192.0" promptText="TEHLSI">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -280,12 +280,12 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="69.0" layoutY="444.0" mnemonicParsing="false" onAction="#add_customers" prefHeight="38.0" prefWidth="151.0" text="ADD">
+                  <Button layoutX="69.0" layoutY="471.0" mnemonicParsing="false" onAction="#add_customers" prefHeight="38.0" prefWidth="151.0" text="ADD">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="271.0" layoutY="445.0" mnemonicParsing="false" onAction="#view_customers" prefHeight="38.0" prefWidth="151.0" text="VIEW">
+                  <Button layoutX="271.0" layoutY="470.0" mnemonicParsing="false" onAction="#view_customers" prefHeight="38.0" prefWidth="151.0" text="VIEW">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -300,7 +300,7 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="464.0" layoutY="446.0" mnemonicParsing="false" onAction="#open_import_excel_file" prefHeight="38.0" prefWidth="208.0" text="IMPORT FROM EXCEL">
+                  <Button layoutX="464.0" layoutY="471.0" mnemonicParsing="false" onAction="#open_import_excel_file" prefHeight="38.0" prefWidth="208.0" text="IMPORT FROM EXCEL">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -361,6 +361,26 @@
                         <Font size="14.0" />
                      </font>
                   </TextArea>
+                  <Label layoutX="31.0" layoutY="403.0" text="CHASSIS NUMBER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="chassis_number" layoutX="155.0" layoutY="397.0" prefHeight="30.0" prefWidth="192.0" promptText="CHASSIS NUMBER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="registration_number" layoutX="156.0" layoutY="430.0" prefHeight="30.0" prefWidth="192.0" promptText="REGISTRATION NUMBER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="11.0" layoutY="436.0" text="REGISTRATION NUMBER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
 

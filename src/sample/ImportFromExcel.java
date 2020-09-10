@@ -74,6 +74,8 @@ public class ImportFromExcel {
             headerList.add("OPERATOR NAME");
             headerList.add("OPERATOR NUMBER");
             headerList.add("JOB CARD NUMBER");
+            headerList.add("CHASSIS NUMBER");
+            headerList.add("REGISTRATION NUMBER");
 
 
             for(int i=0; i<headerList.size();i++)
@@ -483,6 +485,32 @@ public class ImportFromExcel {
                     erroeLog.add(error);*/
                 }
 
+                //20  Chassis number
+                try {
+                    String aa = (getStringCelldata(row, 20));
+                    /*if (aa.trim().length() < 1) {
+                        String error = "Mistake in row : " + (b) + " and column 19 : cell should contain Job card number \n";
+                        erroeLog.add(error);
+                    }*/
+                } catch (Exception e) {
+                    /*dataIsCorrect = false;
+                    String error = "Mistake in row : " + (b) + " and column 19 : cell should contain Job card number\n";
+                    erroeLog.add(error);*/
+                }
+
+                //21  Registration number
+                try {
+                    String aa = (getStringCelldata(row, 21));
+                    /*if (aa.trim().length() < 1) {
+                        String error = "Mistake in row : " + (b) + " and column 19 : cell should contain Job card number \n";
+                        erroeLog.add(error);
+                    }*/
+                } catch (Exception e) {
+                    /*dataIsCorrect = false;
+                    String error = "Mistake in row : " + (b) + " and column 19 : cell should contain Job card number\n";
+                    erroeLog.add(error);*/
+                }
+
             }
 
 
@@ -646,6 +674,20 @@ public class ImportFromExcel {
                 String job_card_number = (getStringCelldata(row, 19));
                 System.out.println("job_card" + job_card_number);
                 dto.setJob_card_number(job_card_number);
+
+                // 20 job card number
+
+                String chassis_number = (getStringCelldata(row, 20));
+                System.out.println("chassis" + chassis_number);
+                dto.setChassis_number(chassis_number);
+
+
+                // 21 job card number
+
+                String registrtion_number = (getStringCelldata(row, 21));
+                System.out.println("registration" + registrtion_number);
+                dto.setRegistration_number(registrtion_number);
+
 
                 b = d.insert(dto);
             }
