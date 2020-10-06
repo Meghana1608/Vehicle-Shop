@@ -244,14 +244,14 @@ public class ImportFromExcel {
                 //4  Father Name
                 try {
                     String aa = (getStringCelldata(row, 4));
-                    if (aa.trim().length() < 1) {
-                        String error = "Mistake in row : " + (b) + " and column 5 : cell should contain Father Name\n";
-                        erroeLog.add(error);
-                    }
+//                 //   if (aa.trim().length() < 1) {
+//                        String error = "Mistake in row : " + (b) + " and column 5 : cell should contain Father Name\n";
+//                        erroeLog.add(error);
+//                 //   }
                 } catch (Exception e) {
-                    dataIsCorrect = false;
-                    String error = "Mistake in row : " + (b) + " and column 5 : cell should contain Father Name\n";
-                    erroeLog.add(error);
+//                    dataIsCorrect = false;
+//                    String error = "Mistake in row : " + (b) + " and column 5 : cell should contain Father Name\n";
+//                    erroeLog.add(error);
                 }
 
 
@@ -372,49 +372,50 @@ public class ImportFromExcel {
                     String dateyyy1 = getStringCelldata(row, 12);
                     int py1 = Integer.parseInt(dateyyy1);
 
-                    if ((py1 + "").trim().length() != 4) {
+                   /* if ((py1 + "").trim().length() != 4) {
                         String error = "Mistake in row : " + (b) + " and column 13 : cell should contain Year in 'YYYY' pattern\n";
                         erroeLog.add(error);
-                    }
+                    }*/
                 } catch (Exception e) {
-                    dataIsCorrect = false;
+/*                    dataIsCorrect = false;
                     String error = "Mistake in row : " + (b) + " and column 13 : cell should contain Year in 'YYYY' pattern\n";
                     erroeLog.add(error);
+              */
                 }
 
 
-                //  13   date of sale date MM
+                //  13   date of service date MM
                 try {
                     int pm = Integer.parseInt((getStringCelldata(row, 13)));
                     date = date + "-" + pm;
-                    if (pm <= 0 || pm > 12) {
+                  /*  if (pm <= 0 || pm > 12) {
                         String error = "Mistake in row : " + b + " and column 14 : cell should contain month in 'MM' pattern\n";
                         row.getCell(1).setCellStyle(ErrorCellstyle);
                         erroeLog.add(error);
-                    }
+                    }*/
                 } catch (Exception e) {
-                    dataIsCorrect = false;
+                   /* dataIsCorrect = false;
                     String error = "Mistake in row : " + b + " and column 14 : cell should contain month in 'MM' pattern\n";
                     row.getCell(1).setCellStyle(ErrorCellstyle);
-                    erroeLog.add(error);
+                    erroeLog.add(error);*/
                 }
 
 
-                //  14   date of sale dd
+                //  14   date of service dd
                 try {
                     int pd = Integer.parseInt((getStringCelldata(row, 14)));
                     date = date + "-" + pd;
 
 
-                    if (pd <= 0 || pd > 31) {
+                   /* if (pd <= 0 || pd > 31) {
                         dataIsCorrect = false;
                         String error = "Mistake in row : " + b + " and column 15 : cell should contain day in 'DD' pattern\n";
                         erroeLog.add(error);
-                    }
+                    }*/
                 } catch (Exception e) {
-                    dataIsCorrect = false;
+                   /* dataIsCorrect = false;
                     String error = "Mistake in row : " + b + " and column 15 : cell should contain day in 'DD' pattern\n";
-                    erroeLog.add(error);
+                    erroeLog.add(error);*/
                 }
 
                 //15 Customer Feedback
