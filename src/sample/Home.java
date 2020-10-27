@@ -916,4 +916,93 @@ public class Home implements Initializable {
 
     public void live_search_model_num(KeyEvent keyEvent) {
     }
-}
+
+    public void update_service_date_individually(ActionEvent actionEvent) throws Exception {
+
+        try {
+            connection=DBConnection.getConnection();
+            String conditions = " ", modelname = "", service = "";
+
+                    ObservableList oa = LoadingTableViewDataSelectedRowName.selectItem();
+
+                    ArrayList aa = new ArrayList();
+                    aa.add(oa.get(0));
+
+                    ArrayList newArray = new ArrayList();
+                    newArray = aa;
+                    String old = String.valueOf(newArray.get(0));
+                    ArrayList<String> bb = new ArrayList<String>();
+
+                    old = old.replace("[", "");
+                    old = old.replace("]", "");
+
+                    String log[] = old.split(",");
+                    String log1[] = old.split(",");
+
+                    bb.add(log1[0]);
+                    try {
+                        bb.add(log1[1]);
+                        view_renewal_cust.setVisible(true);
+                    } catch (Exception e) {
+
+                        Alert a = new Alert(Alert.AlertType.INFORMATION);
+                        a.setContentText("PLEASE SELECT CUSTOMER");
+                        a.showAndWait();
+                    }
+
+            int e_id = Integer.parseInt(bb.get(0));
+            String query = "Select * from customers where id='" + e_id + "'";
+            ResultSet rs =connection.createStatement().executeQuery(query);
+            while (rs.next())
+            {
+                ResultSet fetch_model_name = connection.createStatement().executeQuery("select * from customers where  id = " +e_id );
+                while (fetch_model_name.next()) {
+                    modelname = fetch_model_name.getString("model");
+                    service = fetch_model_name.getString("service_date");
+                }
+
+                String modell = "", in_hrs = "", in_days = "", in_mnth = "", model_no = "";
+                ResultSet setmodell = connection.createStatement().executeQuery("select * from models where model_name='" + modelname + "'");
+                while (setmodell.next()) {
+                    modell = setmodell.getString("model_name");
+                    in_hrs = setmodell.getString("service_duration_in_hrs");
+                    in_days = setmodell.getString("service_duration_in_days");
+                    in_mnth = setmodell.getString("service_duration_in_months");
+                    model_no = setmodell.getString("model_number");
+                }
+
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar c = Calendar.getInstance();
+                c.setTime(sdf.parse(service));
+                c.add(Calendar.DATE, Integer.parseInt(in_days));
+                //String updated_service_date =service  + in_days;  ///concatenates
+                String output = sdf.format(c.getTime());
+                System.out.println(output);
+
+
+                // ADDING DAYS TO SERVICE DATE LOGIC SHOULD BE ADDED HERE
+
+                PreparedStatement ps = connection.prepareStatement("update customers set " +
+                        "customer_feedback='"+feedback_box.getText()+"', "+
+                        "service_feedback='"+service_feedback_box.getText()+"', "+
+                        "service_date = '"+ output +"' where id = "+ e_id );
+
+                int j = ps.executeUpdate();
+
+                if (j > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("CUSTOMER SERVICE DATE AND FEEDBACK UPDATED");
+                    alert.showAndWait();
+
+                    search_renewal_cust(actionEvent);
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        }
+
+    }
