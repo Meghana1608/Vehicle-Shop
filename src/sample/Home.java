@@ -1159,6 +1159,7 @@ public class Home implements Initializable {
                 Controller.createExcelFile(query, path);
             }}
             catch(Exception e){}
+
     }
 
     public void update_pending_service_date_individually(ActionEvent actionEvent) {
