@@ -85,6 +85,11 @@ public class Home implements Initializable {
     public TextArea service_feedback_box;
     public TextField chassis_number;
     public TextField registration_number;
+    public AnchorPane pending_service_pane;
+    public DatePicker check_service_date;
+    public Pane view_pending_service_pane;
+    public TextField check_model_number;
+    public TextField check_engine_number;
 
 
     Connection connection = null;
@@ -151,6 +156,7 @@ public class Home implements Initializable {
         cust_pane.setVisible(false);
         sms_pane.setVisible(false);
         renewal_pane.setVisible(false);
+        pending_service_pane.setVisible(false);
     }
 
     public void create_id(MouseEvent mouseEvent) {
@@ -296,6 +302,7 @@ public class Home implements Initializable {
         cust_pane.setVisible(false);
         sms_pane.setVisible(false);
         renewal_pane.setVisible(false);
+        pending_service_pane.setVisible(false);
     }
 
     public void hrs_to_mon(KeyEvent keyEvent) {
@@ -423,6 +430,7 @@ public class Home implements Initializable {
         cust_pane.setVisible(true);
         sms_pane.setVisible(false);
         renewal_pane.setVisible(false);
+        pending_service_pane.setVisible(false);
         modelload();
     }
 
@@ -628,6 +636,7 @@ public class Home implements Initializable {
         cust_pane.setVisible(false);
         sms_pane.setVisible(true);
         renewal_pane.setVisible(false);
+        pending_service_pane.setVisible(false);
     }
 
 
@@ -721,6 +730,7 @@ public class Home implements Initializable {
         model_pane.setVisible(false);
         cust_pane.setVisible(false);
         sms_pane.setVisible(false);
+        pending_service_pane.setVisible(false);
     }
 
     public void search_renewal_cust(ActionEvent actionEvent) throws SQLException {
@@ -1005,4 +1015,154 @@ public class Home implements Initializable {
 
         }
 
+    public void view_pending_dates(ActionEvent actionEvent) throws Exception {
+        connection = DBConnection.getConnection();
+        try {
+            String conditions = "";
+            connection = DBConnection.getConnection();
+            if (check_engine_number.getText().trim().isEmpty() &&
+                    check_model_number.getText().trim().isEmpty() &&
+                    check_service_date.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PLEASE ENTER AT LEAST SERVICE DATE, MODEL NUMBER OR ENGINE NUMBER TO VIEW AND UPDATE CUSTOMER SERVICE DATE");
+                alert.showAndWait();
+            } else {
+
+                if (!(check_engine_number.getText().trim().isEmpty())) {
+                    conditions = conditions + " and engine_number ='" + check_engine_number.getText() + "' ";
+                }
+                if (!(check_model_number.getText().trim().isEmpty())) {
+                    conditions = conditions + " and model_number ='" + check_model_number.getText() + "' ";
+                }
+                if (!(check_service_date.getValue() == null)) {
+                    conditions = conditions + " and service_date <='" + check_service_date.getValue() + "' ";
+                }
+
+                String query = "select * from customers where  id>0 " + conditions;
+                Welcome(query, view_pending_service_pane, 240, 550);
+
+
+            }
+        }
+        catch (Exception e)
+        {e.printStackTrace();}
     }
+
+    public void update_pending_service_date(ActionEvent actionEvent) throws Exception {
+
+        connection = DBConnection.getConnection();
+        try {
+            String conditions = "", modelname = "", service = "";
+            connection = DBConnection.getConnection();
+            if (check_engine_number.getText().trim().isEmpty() &&
+                    check_model_number.getText().trim().isEmpty() &&
+                    check_service_date.getValue() == null) {
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PLEASE ENTER AT LEAST SERVICE DATE, MODEL NUMBER OR ENGINE NUMBER TO VIEW AND UPDATE CUSTOMER SERVICE DATE");
+                alert.showAndWait();
+            } else {
+
+                if (!(check_engine_number.getText().trim().isEmpty())) {
+                    conditions = conditions + " and engine_number ='" + check_engine_number.getText() + "' ";
+                }
+                if (!(check_model_number.getText().trim().isEmpty())) {
+                    conditions = conditions + " and model_number ='" + check_model_number.getText() + "' ";
+                }
+                if (!(check_service_date.getValue() == null)) {
+                    conditions = conditions + " and service_date <= '" + check_service_date.getValue() + "' ";
+                }
+
+                ResultSet fetch_model_name = connection.createStatement().executeQuery("select * from customers where  id>0 " + conditions);
+                 while (fetch_model_name.next()) {
+                    modelname = fetch_model_name.getString("model");
+                    service = fetch_model_name.getString("service_date");
+                }
+
+                String modell = "", in_hrs = "", in_days = "", in_mnth = "", model_no = "";
+                ResultSet setmodell = connection.createStatement().executeQuery("select * from models where model_name='" + modelname + "'");
+                while (setmodell.next()) {
+                    modell = setmodell.getString("model_name");
+                    in_hrs = setmodell.getString("service_duration_in_hrs");
+                    in_days = setmodell.getString("service_duration_in_days");
+                    in_mnth = setmodell.getString("service_duration_in_months");
+                    model_no = setmodell.getString("model_number");
+                }
+
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(sdf.parse(service));
+                    c.add(Calendar.DATE, Integer.parseInt(in_days));
+                    //String updated_service_date =service  + in_days;  ///concatenates
+                    String output = sdf.format(c.getTime());
+                    System.out.println(output);
+
+
+                // ADDING DAYS TO SERVICE DATE LOGIC SHOULD BE ADDED HERE
+
+                PreparedStatement ps = connection.prepareStatement("update customers set " +
+                        "service_date = '"+ output +"' where id > 0 " + conditions);
+
+                int j = ps.executeUpdate();
+
+                if (j > 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("CUSTOMER SERVICE DATE UPDATED");
+                    alert.showAndWait();
+                    view_pending_dates(actionEvent);
+                }
+            } }
+
+        catch(Exception e){
+                e.printStackTrace(); }
+
+    }
+
+    public void open_pendin_service(ActionEvent actionEvent) {
+
+        employee_pane.setVisible(false);
+        model_pane.setVisible(false);
+        cust_pane.setVisible(false);
+        sms_pane.setVisible(false);
+        renewal_pane.setVisible(false);
+        pending_service_pane.setVisible(true);
+    }
+
+    public void view_pending_dates_in_excel(ActionEvent actionEvent) throws Exception {
+        connection = DBConnection.getConnection();
+        try {
+            String conditions = "";
+            connection = DBConnection.getConnection();
+            if (check_engine_number.getText().trim().isEmpty() &&
+                    check_model_number.getText().trim().isEmpty() &&
+                    check_service_date.getValue() == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("PLEASE ENTER AT LEAST SERVICE DATE, MODEL NUMBER OR ENGINE NUMBER TO VIEW AND UPDATE CUSTOMER SERVICE DATE");
+                alert.showAndWait();
+            } else {
+
+                if (!(check_engine_number.getText().trim().isEmpty())) {
+                    conditions = conditions + " and engine_number ='" + check_engine_number.getText() + "' ";
+                }
+                if (!(check_model_number.getText().trim().isEmpty())) {
+                    conditions = conditions + " and model_number ='" + check_model_number.getText() + "' ";
+                }
+                if (!(check_service_date.getValue() == null)) {
+                    conditions = conditions + " and service_date <='" + check_service_date.getValue() + "' ";
+                }
+
+                String query = "select * from customers where  id>0 " + conditions;
+                new File(Check.drive_name() + Configuring_Path.FOLDER_PATH).mkdir();
+                new File(Check.drive_name() + Configuring_Path.FOLDER_PATH + "Pending_Customer_Service_Details/").mkdir();
+                String path = Check.drive_name() + Configuring_Path.FOLDER_PATH + "Pending_Customer_Service_Details/Pending_Customer_Service_Details.xlsx";
+                Controller.createExcelFile(query, path);
+            }}
+            catch(Exception e){}
+    }
+
+    public void update_pending_service_date_individually(ActionEvent actionEvent) {
+
+
+    }
+}
