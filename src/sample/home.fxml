@@ -523,7 +523,7 @@
                      </font>
                   </Button>
                   <Pane fx:id="view_pending_service_pane" layoutX="59.0" layoutY="175.0" prefHeight="236.0" prefWidth="599.0" />
-                  <Button layoutX="91.0" layoutY="417.0" mnemonicParsing="false" onAction="#update_pending_service_date" prefHeight="31.0" prefWidth="185.0" text="UPDATE ALL">
+                  <Button layoutX="91.0" layoutY="417.0" mnemonicParsing="false" onAction="#update_pending_service_date" prefHeight="31.0" prefWidth="185.0" text="UPDATE ALL" visible="false">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -553,7 +553,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button layoutX="338.0" layoutY="417.0" mnemonicParsing="false" onAction="#update_pending_service_date_individually" prefHeight="31.0" prefWidth="212.0" text="UPDATE INDIVIDUALLY ">
+                  <Button layoutX="263.0" layoutY="417.0" mnemonicParsing="false" onAction="#update_pending_service_date_individually" prefHeight="31.0" prefWidth="212.0" text="UPDATE INDIVIDUALLY ">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
