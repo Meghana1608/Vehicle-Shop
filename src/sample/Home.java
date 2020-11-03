@@ -92,28 +92,15 @@ public class Home implements Initializable {
     public Pane view_pending_service_pane;
     public TextField check_model_number;
     public TextField check_engine_number;
+
+
     public AnchorPane upcoming_service_pane;
     public DatePicker upcoming_service_date;
     public TextArea kya_problem;
-    public TextField new_registration_number;
-    public TextField new_chassis_number;
-    public TextArea new_service_feedback;
-    public TextField new_job_card_number;
-    public TextField new_operator_number;
-    public TextField new_operator_name;
-    public TextArea new_feedback;
-    public TextField new_model_number1;
-    public DatePicker new_service_date;
     public TextField new_mobile_number;
-    public TextField new_village;
-    public TextField new_tehlsi;
-    public ComboBox new_model;
-    public TextField new_engine_number;
-    public TextField new_file_number;
     public TextField new_cust_id;
-    public DatePicker new_date_of_sale;
     public TextField new_cust_name;
-    public TextField new_father_name;
+    public TextArea new_address;
 
 
     Connection connection = null;
@@ -1288,49 +1275,10 @@ public class Home implements Initializable {
         renewal_pane.setVisible(false);
         pending_service_pane.setVisible(false);
         upcoming_service_pane.setVisible(true);
-        modelload1();
+
     }
 
-    void modelload1() throws SQLException {
-        try {
-            connection = DBConnection.getConnection();
-            new_model.getItems().removeAll(new_model.getItems());
-            String query1 = "select model_name from models group by model_name order by model_name ASC";
-            ArrayList<String> gstList = new ArrayList<String>();
-            ResultSet set = connection.createStatement().executeQuery(query1);
-            while (set.next()) {
-                gstList.add(set.getString(1));
-            }
 
-            for (int a = 0; a < gstList.size(); a++) {
-                String a1 = gstList.get(a);
-                for (int b = a + 1; b < gstList.size(); b++) {
-                    String b1 = gstList.get(b);
-                    if (a1.equals(b1)) {
-                        String temp = a1;
-                        a1 = b1;
-                        b1 = temp;
-                        gstList.set(a, a1);
-                        gstList.set(b, b1);
-                    }
-                }
-            }
-
-            for (int i = 0; i < gstList.size(); i++) {
-                new_model.getItems().add(gstList.get(i));
-            }
-            if (gstList.size() > 0) {
-                new_model.setValue(gstList.get(0));
-            }
-
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }
-    }
 
     public void gen_new_cust_id(MouseEvent mouseEvent) {
         int i = 0;
@@ -1339,7 +1287,7 @@ public class Home implements Initializable {
             String empIdIs = "";
             Statement stm1 = connection.createStatement();
 
-            ResultSet rs = stm1.executeQuery("select max(id) as id from customers");
+            ResultSet rs = stm1.executeQuery("select max(id) as id from upcoming_services");
             while (rs.next()) {
                 empIdIs = rs.getString("id");
                 i++;
@@ -1379,43 +1327,22 @@ public class Home implements Initializable {
             Alert alert1 = new Alert(Alert.AlertType.ERROR);
             alert1.setContentText("ENTER VALID MOBILE NUMBER");
             alert1.showAndWait();
-        } else if (new_father_name.getText().trim().isEmpty()) {
-            Alert alert1 = new Alert(Alert.AlertType.ERROR);
-            alert1.setContentText("PLEASE ENTER FATHER NAME");
-            alert1.showAndWait();
         } else {
 
             try {
 
                 int i = 0;
 
-                String query1 = "Insert into customers(id, date_of_sale, customer_name, father_name, " +
-                        "village, tehlsi, mobile_number, model, engine_number, file_number, model_number, service_date, " +
-                        "customer_feedback, service_feedback, operator_name, operator_number, job_card_number, chassis_number, registration_number, upcoming_service_date, " +
-                        "problem )" +
-                        " values(?,?,?,?,?   ,?,?,?,?,?,  ?,?,?,?,?,  ?,?,?,?,?,  ?)";
+                String query1 = "Insert into upcoming_services(id, customer_name, " +
+                        " mobile_number,  upcoming_service_date, address, problem )" +
+                        " values(?,?,?,?,?   ,?)";
                 PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
                 preparedStatement1.setString(1, new_cust_id.getText().trim());
-                preparedStatement1.setString(2, String.valueOf(new_date_of_sale.getValue()));
-                preparedStatement1.setString(3, new_cust_name.getText().trim());
-                preparedStatement1.setString(4, new_father_name.getText().trim());
-                preparedStatement1.setString(5, new_village.getText().trim());
-                preparedStatement1.setString(6, new_tehlsi.getText().trim());
-                preparedStatement1.setString(7, new_mobile_number.getText().trim());
-                preparedStatement1.setString(8, String.valueOf(new_model.getValue()));
-                preparedStatement1.setString(9, new_engine_number.getText().trim());
-                preparedStatement1.setString(10, new_file_number.getText().trim());
-                preparedStatement1.setString(11, new_model_number1.getText().trim());
-                preparedStatement1.setString(12, String.valueOf(new_service_date.getValue()));
-                preparedStatement1.setString(13, new_feedback.getText());
-                preparedStatement1.setString(14, new_service_feedback.getText());
-                preparedStatement1.setString(15, new_operator_name.getText());
-                preparedStatement1.setString(16, new_operator_number.getText());
-                preparedStatement1.setString(17, new_job_card_number.getText());
-                preparedStatement1.setString(18, new_chassis_number.getText());
-                preparedStatement1.setString(19, new_registration_number.getText());
-                preparedStatement1.setString(20, String.valueOf(upcoming_service_date.getValue()));
-                preparedStatement1.setString(21, kya_problem.getText());
+                preparedStatement1.setString(2, new_cust_name.getText().trim());
+                preparedStatement1.setString(3, new_mobile_number.getText().trim());
+                preparedStatement1.setString(4, String.valueOf(upcoming_service_date.getValue()));
+                preparedStatement1.setString(5, new_address.getText());
+                preparedStatement1.setString(6, kya_problem.getText());
 
 
                 i = preparedStatement1.executeUpdate();
@@ -1451,22 +1378,8 @@ public class Home implements Initializable {
     {
         new_cust_id.clear();
         new_cust_name.clear();
-        new_father_name.clear();
-        new_village.clear();
-        new_tehlsi.clear();
+        new_address.clear();
         new_mobile_number.clear();
-        new_engine_number.clear();
-        new_file_number.clear();
-        new_date_of_sale.setValue(today);
-        new_service_date.setValue(today);
-        new_model_number1.clear();
-        new_feedback.clear();
-        new_service_feedback.clear();
-        new_operator_name.clear();
-        new_operator_number.clear();
-        new_job_card_number.clear();
-        new_chassis_number.clear();
-        new_registration_number.clear();
         upcoming_service_date.setValue(today);
         kya_problem.clear();
     }
@@ -1474,24 +1387,11 @@ public class Home implements Initializable {
 
     public void update_existing(ActionEvent actionEvent) throws SQLException {
         try {
-            PreparedStatement ps = connection.prepareStatement("update customers set " +
-                    "date_of_sale='"+new_date_of_sale.getValue()+"', " +
+            PreparedStatement ps = connection.prepareStatement("update upcoming_services set " +
                     "customer_name='"+new_cust_name.getText()+"', " +
-                    "father_name='"+new_father_name.getText()+"', " +
-                    "village='"+new_village.getText()+"', " +
-                    "tehlsi='"+new_tehlsi.getText()+"', " +
                     "mobile_number='"+new_mobile_number.getText()+"', " +
-                    "model='"+new_model.getValue()+"', " +
-                    "model_number='"+new_model_number1.getText()+"', " +
-                    "engine_number='"+new_engine_number.getText()+"', " +
-                    "service_date='"+new_service_date.getValue()+"', " +
-                    "operator_name='"+new_operator_name.getText()+"', " +
-                    "operator_number='"+new_operator_number.getText()+"', " +
-                    "job_card_number='"+new_job_card_number.getText()+"', " +
-                    "chassis_number='"+new_chassis_number.getText()+"', " +
-                    "registration_number='"+new_registration_number.getText()+"', " +
                     "upcoming_service_date='"+upcoming_service_date.getValue()+"', " +
-                    "registration_number='"+new_registration_number.getText()+"', " +
+                    "address='"+new_address.getText()+"', " +
                     "problem='" + kya_problem.getText().trim() + "' where id = " + new_cust_id.getText().trim());
 
             int j = ps.executeUpdate();
@@ -1550,31 +1450,18 @@ public class Home implements Initializable {
         try {
 
             connection2=DBConnection.getConnection();
-            AutoCompletionBinding<String> autoCompletionBindings = TextFields.bindAutoCompletion(new_cust_name, makeSearch("select DISTINCT(customer_name) from customers", "customer_name"));
+            AutoCompletionBinding<String> autoCompletionBindings = TextFields.bindAutoCompletion(new_cust_name, makeSearch("select DISTINCT(customer_name) from upcoming_services", "customer_name"));
             if (!new_cust_name.getText().trim().isEmpty()) {
-                String query    =   "select * from customers where customer_name like '%" + new_cust_name.getText().trim().toUpperCase() + "%'";
+                String query    =   "select * from upcoming_services where customer_name like '%" + new_cust_name.getText().trim().toUpperCase() + "%'";
 
                 if(connection2.isClosed())  { connection2= DBConnection.getConnection(); }
                 ResultSet set2 = connection2.createStatement().executeQuery(query + " limit 1");
                 if(set2.next()) {
                     new_cust_id.setText(set2.getString("id"));
-                    new_date_of_sale.setValue(LocalDate.parse(set2.getString("date_of_sale")));
-                    new_father_name.setText(set2.getString("father_name"));
-                    new_service_date.setValue(LocalDate.parse(set2.getString("service_date")));
-                    new_village.setText(set2.getString("village"));
-                    new_operator_name.setText(set2.getString("operator_name"));
-                    new_operator_number.setText(set2.getString("operator_number"));
-                    new_tehlsi.setText(set2.getString("tehlsi"));
-                    new_chassis_number.setText(set2.getString("chassis_number"));
-                    new_registration_number.setText(set2.getString("registration_number"));
                     new_mobile_number.setText(set2.getString("mobile_number"));
-                    new_model.setValue(set2.getString("model"));
-                    new_model_number1.setText(set2.getString("model_number"));
-                    new_engine_number.setText(set2.getString("engine_number"));
-                    new_file_number.setText(set2.getString("file_number"));
-                    new_job_card_number.setText(set2.getString("job_card_number"));
-                    new_feedback.setText(set2.getString("customer_feedback"));
-                    new_service_feedback.setText(set2.getString("service_feedback"));
+                    upcoming_service_date.setValue(LocalDate.parse(set2.getString("upcoming_service_date")));
+                    new_address.setText(set2.getString("address"));
+                    kya_problem.setText(set2.getString("problem"));
 
                 }else {
                     new_cust_id.setText("");
@@ -1594,33 +1481,20 @@ public class Home implements Initializable {
         try {
 
             connection2=DBConnection.getConnection();
-            AutoCompletionBinding<String> autoCompletionBindings = TextFields.bindAutoCompletion(new_cust_name, makeSearch("select DISTINCT(customer_name) from customers", "customer_name"));
-            AutoCompletionBinding<String> autoCompletionBindings1 = TextFields.bindAutoCompletion(new_mobile_number, makeSearch("select DISTINCT(mobile_number) from customers", "mobile_number"));
+            AutoCompletionBinding<String> autoCompletionBindings = TextFields.bindAutoCompletion(new_cust_name, makeSearch("select DISTINCT(customer_name) from upcoming_services", "customer_name"));
+            AutoCompletionBinding<String> autoCompletionBindings1 = TextFields.bindAutoCompletion(new_mobile_number, makeSearch("select DISTINCT(mobile_number) from upcoming_services", "mobile_number"));
 
             if (!new_mobile_number.getText().trim().isEmpty()) {
-                String query    =   "select * from customers where customer_name like '%" + new_mobile_number.getText().trim().toUpperCase() + "%'";
+                String query    =   "select * from upcoming_services where mobile_number like '%" + new_mobile_number.getText().trim().toUpperCase() + "%'";
 
                 if(connection2.isClosed())  { connection2= DBConnection.getConnection(); }
                 ResultSet set2 = connection2.createStatement().executeQuery(query + " limit 1");
                 if(set2.next()) {
                     new_cust_id.setText(set2.getString("id"));
-                    new_date_of_sale.setValue(LocalDate.parse(set2.getString("date_of_sale")));
-                    new_father_name.setText(set2.getString("father_name"));
-                    new_service_date.setValue(LocalDate.parse(set2.getString("service_date")));
-                    new_village.setText(set2.getString("village"));
-                    new_operator_name.setText(set2.getString("operator_name"));
-                    new_operator_number.setText(set2.getString("operator_number"));
-                    new_tehlsi.setText(set2.getString("tehlsi"));
-                    new_chassis_number.setText(set2.getString("chassis_number"));
-                    new_registration_number.setText(set2.getString("registration_number"));
                     new_cust_name.setText(set2.getString("customer_name"));
-                    new_model.setValue(set2.getString("model"));
-                    new_model_number1.setText(set2.getString("model_number"));
-                    new_engine_number.setText(set2.getString("engine_number"));
-                    new_file_number.setText(set2.getString("file_number"));
-                    new_job_card_number.setText(set2.getString("job_card_number"));
-                    new_feedback.setText(set2.getString("customer_feedback"));
-                    new_service_feedback.setText(set2.getString("service_feedback"));
+                    upcoming_service_date.setValue(LocalDate.parse(set2.getString("upcoming_service_date")));
+                    new_address.setText(set2.getString("address"));
+                    kya_problem.setText(set2.getString("problem"));
 
                 }else {
                     new_cust_id.setText("");
@@ -1635,7 +1509,7 @@ public class Home implements Initializable {
 
     public void excel_for_upcoming_service_date(ActionEvent actionEvent) throws Exception {
 
-        String query = "Select id, customer_name, mobile_number, registration_number, upcoming_service_date, problem from customers where upcoming_service_date ='" + upcoming_service_date.getValue() + "'";
+        String query = "Select id, customer_name, mobile_number, address, upcoming_service_date, problem from upcoming_services where upcoming_service_date ='" + upcoming_service_date.getValue() + "'";
 
         File dir = new File(Check.drive_name()+Configuring_Path.FOLDER_PATH);
         dir.mkdir();
